@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8" />
+
+		<title>Traveller</title>
+
+		<link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="/stylesheets/style.css">
+		<link rel="stylesheet" href="/stylesheets/animations.css">
+		<link rel="stylesheet" href="/fontawesome/css/font-awesome.css">
+
+
+	</head>
+
+	<body>
+		<traveller-header></traveller-header>
+
+	    <div class="main">
+	    	<div ui-view></div>
+		</div>
+
+		<footer>
+	    	<div class="footer-end">
+				<div class="col-lg-3">© Copyright 2015 by Traveller</div>
+			</div>
+		</footer>
+
+		<script src="/jquery/dist/jquery.min.js"></script>
+		<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="/jquery-appear/src/jquery.appear.js"></script>
+		<script src="/angular/angular.js"></script>
+		<script src="/ng-resource/dist/ng-resource.js"></script>
+		<script src="/angular-ui-router/release/angular-ui-router.js"></script>
+
+		<script src="/scripts/app.module.js"></script>
+		<script src="/scripts/app.config.js"></script>
+		<script src="/scripts/views.module.js"></script>
+		<script src="/scripts/views/main.controller.js"></script>	
+		<script src="/scripts/views/traveller.controller.js"></script>
+
+
+		<script src="/scripts/directives/travellerHeader/travellerHeader.directive.js"></script>
+
+	</body>
+</html>

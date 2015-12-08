@@ -1,0 +1,62 @@
+<div class="main-banner">
+	<div class="main-slogon" ng-if="!tourShow">聪明的选择，让旅游更完美</div>
+	<div>
+		<button class="btn btn-primary btn-lg" ng-click="submitTour()" ng-if="!tourShow"> 提交旅游计划 </button>
+	</div>
+	<div ng-if="tourShow" class="main-form">
+		<div class="main-slogon-sm" >聪明的选择，让旅游更完美</div>
+		  <div class="main-form-group">
+		    <div class="form-item">目的地:</div>
+		    <div><input class="form-control" placeholder="目的地"></div>
+		  </div>
+
+		  <div class="main-form-group">
+		    <div class="form-item">出发城市:</div>
+		    <div><input class="form-control" placeholder="出发城市"></div>
+		  </div>
+
+		  <div class="main-form-group">
+		    <div class="form-item">时间:</div>
+		    <div><input class="form-control" placeholder="时间"></div>
+		  </div>
+
+		  <div class="main-form-group">
+		    <div class="form-item">人数:</div>
+		    <div><input class="form-control" placeholder="人数"></div>
+		  </div>
+
+		  <div class="main-form-group">
+		    <div class="form-item">旅行天数:</div>
+		    <div><input class="form-control" placeholder="旅行天数"></div>
+		  </div>
+
+		  <div class="main-form-group">
+		    <div class="form-item">主题:</div>
+		    <div><input class="form-control" placeholder="主题"></div>
+		  </div>
+
+		  <div class="main-form-group">
+		    <div class="form-item">豪华指数:</div>
+		    <div><input class="form-control" placeholder="豪华指数"></div>
+		  </div>
+
+		  <div class="main-form-group">
+		    <div class="form-item">个人兴趣:</div>
+		    <div><input class="form-control" placeholder="个人兴趣"></div>
+		  </div>
+
+		  <div class="form-button">
+		  	<button type="submit" class="btn btn-primary btn-lg">提交旅游路线</button>
+		  </div>
+	</div>>
+</div>
+
+
+<div class="main-tour">
+	<p> 精品旅游路线 </p>
+	<div class="tourgrid">
+		<div ng-repeat="tour in tours" style="background-image:url({{tour.image}});   background-size: cover; display: flex; justify-content: flex-end; flex-direction: column">
+			<div class="grid-name">{{tour.name}}</div>
+		</div>
+	</div>
+</div> 

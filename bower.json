@@ -1,0 +1,19 @@
+{
+  "name": "Techbow",
+  "version": "0.0.0",
+  "authors": [
+    "Wei Han"
+  ],
+  "description": "Techbow",
+  "private": true,
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5",
+    "angular": "~1.4.8",
+    "jquery-appear": "~0.2.2",
+    "modernizr": "~2.8.3",
+    "fontawesome": "~4.4.0",
+    "angular-ui-router": "~0.2.15",
+    "ng-resource": "~0.0.2"
+  }
+}
