@@ -11,14 +11,14 @@ function DashboardConfig ($stateProvider) {
 
 	$stateProvider.state('main', {
         url: '/main',
-		templateUrl: 'scripts/views/main.tpl.html',
+		templateUrl: 'scripts/views/main/main.tpl.html',
         controller: 'MainCtrl'
     });
 
-    $stateProvider.state('traveller', {
-        url: '/traveller',
-		templateUrl: 'scripts/views/traveller.tpl.html',
-        controller: 'TravellerCtrl'
+    $stateProvider.state('user', {
+        url: '/user',
+		templateUrl: 'scripts/views/user/user.tpl.html',
+        controller: 'UserCtrl'
     });
 }
 

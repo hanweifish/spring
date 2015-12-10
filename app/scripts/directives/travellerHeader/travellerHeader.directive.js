@@ -7,8 +7,8 @@ angular.module('app.directives', [])
     return {
         restrict: 'E',
         templateUrl: 'scripts/directives/travellerHeader/travellerHeader.tpl.html',
+        controller: 'HeaderCtrl',
         link: function (scope, iElement, iAttrs) {
-
         }
     };
 }]);

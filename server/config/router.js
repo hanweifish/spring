@@ -9,10 +9,6 @@ module.exports = function(app) {
   app.post('/api/users', users.createUser);
   app.put('/api/users', users.updateUser);
 
-  app.get('/partials/*', function(req, res) {
-    res.render('../../public/app/' + req.params);
-  });
-
   app.post('/login', auth.authenticate);
 
   app.post('/logout', function(req, res) {
