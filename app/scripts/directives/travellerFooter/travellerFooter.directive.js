@@ -1,7 +1,7 @@
 ;(function(){
 'use strict';
 
-angular.module('app.directives', [])
+angular.module('app.directives')
 .directive('travellerFooter', [
     function () {
     return {

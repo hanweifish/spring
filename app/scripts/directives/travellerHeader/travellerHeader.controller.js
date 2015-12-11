@@ -21,8 +21,10 @@ function HeaderCtrl($scope, $http) {
       username: $scope.forms.username,
       password: $scope.forms.password,
     };
+  }
 
-
+  $scope.changeStatus = function(status) {
+    $scope.userStatus = status;
   }
 
 }
