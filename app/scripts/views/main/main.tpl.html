@@ -51,12 +51,39 @@
 	</div>>
 </div>
 
+<div class="main-feature">
+	<p> 我们的特点 </p>
+	<div class="features">
+		<div ng-repeat="feature in features" style="flex: 1; display: flex; justify-content: space-around; flex-direction: column">
+			<div class="feature-title">
+				<div>
+					<i class="fa {{feature.icon}} fa-2x"></i> 
+				</div>
+				<div>
+					{{feature.title}}
+				</div>
+			</div>
+			<div class="feature-content">{{feature.content}}</div>
+		</div>
+	</div>
+</div> 
+
 
 <div class="main-tour">
 	<p> 精品旅游路线 </p>
 	<div class="tourgrid">
 		<div ng-repeat="tour in tours" style="background-image:url({{tour.image}});   background-size: cover; display: flex; justify-content: flex-end; flex-direction: column">
 			<div class="grid-name">{{tour.name}}</div>
+		</div>
+	</div>
+</div> 
+
+
+<div class="main-corp">
+	<p> 合作方 </p>
+	<div class="corps">
+		<div ng-repeat="corp in corps" class="corp-name">
+			{{corp.name}}
 		</div>
 	</div>
 </div> 

@@ -45,6 +45,45 @@ function MainCtrl($scope, $http) {
         }
     ];
 
+
+    $scope.features = [
+        {
+            'title': '线路定制',
+            'icon': 'fa-plane',
+            'content': '想要自由掌控行程节奏？喜欢与众不同的游玩路线？我们能满足旅行中的各种小任性，同时让你享受最划算的价格.'
+        },
+        {
+            'title': '导游定制',
+            'icon': 'fa-user',
+            'content': '想要自由掌控行程节奏？喜欢与众不同的游玩路线？我们能满足旅行中的各种小任性，同时让你享受最划算的价格.'
+        },
+        {
+            'title': '用户定制',
+            'icon': 'fa-suitcase',
+            'content': '想要自由掌控行程节奏？喜欢与众不同的游玩路线？我们能满足旅行中的各种小任性，同时让你享受最划算的价格.'
+        }
+    ];
+
+    $scope.corps = [
+        {
+            'name': '微博平台'
+        },
+        {
+            'name': '微博平台'
+        },
+        {
+            'name': '微博平台'
+        },
+        {
+            'name': '微博平台'
+        },
+        {
+            'name': '微博平台'
+        },
+    ]
+
+
+
     $scope.submitTour = function() {
         $scope.tourShow = true;
     }

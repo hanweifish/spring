@@ -1,0 +1,32 @@
+/*Footer*/
+
+footer {
+    background-color: #2E3E4F;
+    width: 100%;
+    color: white;
+    padding: 40px 0 20px 0;
+}
+
+.footer-end {
+  width: 80%;
+  margin: 0 auto;
+}
+
+
+.footer-lists {
+	display: flex;
+	font-size: 1.4rem;
+	opacity: 0.6;
+	justify-content: space-around;
+	width: 60%;
+	margin-bottom: 30px;
+}
+
+.footer-lists div:hover {
+	cursor: pointer;
+}
+
+.footer-copyright {
+	font-size: 1.3rem;
+	text-align: center;
+}

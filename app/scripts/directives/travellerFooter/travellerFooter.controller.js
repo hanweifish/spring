@@ -4,17 +4,17 @@
 /* Controllers */
 
 angular.module('app.controllers')
-.controller('UserCtrl', [
+.controller('FooterCtrl', [
     '$scope',
     '$http',
-    UserCtrl
+    FooterCtrl
 ]);
 
 
-function UserCtrl($scope, $http) {
-
-
+function FooterCtrl($scope, $http) {
 
 }
 
 }());
+
+

@@ -1,0 +1,38 @@
+header {
+  width: 100%;
+}
+
+header .navbar-modified {
+  background: rgba(255, 255, 255, 0.7);
+  opacity: 75%;
+  margin: 0;
+}
+
+header .navbar-modified .navbar-brand img{
+  margin-left: 60%;
+  width: 60%;
+}
+
+
+header .navbar-modified .navbar-right{
+  margin-right: 5%;
+}
+
+header .navbar-modified .navbar-right a{
+  color: rgba(75, 75, 75, 1);
+  font-size: 14px;
+}
+
+header li button {
+  margin-top: -10px;
+  margin-right: -15px;
+}
+
+.nav-modify li:nth-last-child(2) a:hover {
+	background: white;
+}
+
+.nav-modify li:nth-last-child(1) a:hover {
+	background: white;
+}
+
