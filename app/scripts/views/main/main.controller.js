@@ -14,10 +14,6 @@ angular.module('app.controllers', [])
 function MainCtrl($scope, $http) {
 
 
-
-    $scope.tourShow = false;
-
-
     $scope.tours = [
         {
             'name': '旧金山',
@@ -84,9 +80,7 @@ function MainCtrl($scope, $http) {
 
 
 
-    $scope.submitTour = function() {
-        $scope.tourShow = true;
-    }
+
 }
 
 }());
