@@ -1,2 +1,9 @@
-node_modules
-bower_components
+node_modules/
+bower_components/
+.tmp/
+.DS*
+npm-debug.log
+dist/
+.sass*
+production/
+dump.rdb

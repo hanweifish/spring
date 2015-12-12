@@ -14,51 +14,28 @@
  
 		<div class="main-form">
 			<div class="main-slogon-sm" >聪明的选择，让旅游更完美</div>
-			  <div class="main-form-group">
-			    <div class="input-group">
-			    	<input class="form-control" placeholder="出发地">
-			    	 <span class="input-group-btn">
-        				<button class="btn btn-default" type="button"><i class="fa fa-plus"></i></button>
-     				 </span>
-			    </div>
+
+			  <div class="banner-form-group">
+			  		<traveller-select options="options.depart" selected="tourForm.Depart" placeholder="出发地"></traveller-select>
+			  		<traveller-select options="options.des" selected="tourForm.Des" placeholder="目的地"></traveller-select>
 			  </div>
 
-			  <div class="main-form-group">
-			    <div class="input-group">
-			    	<input class="form-control" placeholder="途径">
-			    	 <span class="input-group-btn">
-        				<button class="btn btn-default" type="button"><i class="fa fa-plus"></i></button>
-     				 </span>
-			    </div>
+			  <div class="banner-form-group">
+					<traveller-select options="options.middle" selected="tourForm.Middle" placeholder="途经"></traveller-select>
 			  </div>
 
-			  <div class="main-form-group">
-			    <div class="input-group">
-			    	<input class="form-control" placeholder="目的地">
-			    	 <span class="input-group-btn">
-        				<button class="btn btn-default" type="button"><i class="fa fa-plus"></i></button>
-     				 </span>
-			    </div>
+			  <div class="banner-form-group">
+					<input class="form-control"  type="date" placeholder="出发日期" style="width: 40%">
+			    	<traveller-select options="options.people" selected="tourForm.PeopleOld" placeholder="大人" style="width: 30%"></traveller-select>
+			    	<traveller-select options="options.people" selected="tourForm.PeopleYoung" placeholder="小孩" style="width: 30%"></traveller-select>
 			  </div>
 
-			  <div class="main-form-group">
-			    <div><input class="form-control" placeholder="日期"></div>
-			  </div>
 
-			  <div class="main-form-group">
-			    <div><input class="form-control" placeholder="大人/小孩"></div>
-			  </div>
 
-			  <div class="main-form-group">
-			    <div><input class="form-control" placeholder="主题"></div>
-			  </div>
-
-			  <div class="main-form-group">
-			    <div><input class="form-control" placeholder="用车"></div>
-			  </div>
-
-			  <div class="main-form-group">
-			    <div><input class="form-control" placeholder="预算"></div>
+			  <div class="banner-form-group">
+			    	<traveller-select options="options.topic" selected="tourForm.Topic" placeholder="主题" style="width: 30%"></traveller-select>
+			   		<traveller-select options="options.cars" selected="tourForm.Car" placeholder="用车" style="width: 30%"></traveller-select>
+			    	<input class="form-control" placeholder="预算" style="width: 30%">		
 			  </div>
 
 			  <div class="form-button">

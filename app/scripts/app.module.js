@@ -8,7 +8,9 @@ angular.module('app', [
     'app.views',
     'app.directives',
     'ui.router',
+    'ui.bootstrap',
     'ngResource',
+    'ngMaterial',
     'toastr'
 ]);
 
