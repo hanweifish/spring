@@ -1,4 +1,5 @@
 var express = require('express');
+var cors = require('cors');
 
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -13,6 +14,8 @@ var config = require('./server/config/config')[env];
 // require('./server/config/passport')();
 
 // require('./server/config/router')(app);
+
+app.use(cors());
 
 app.listen(config.port);
 console.log('Listening on port ' + config.port + '...');

@@ -44,23 +44,26 @@
     			<i class="fa fa-qq"></i>
     			<i class="fa fa-weixin"></i>
     		</div>
-    		<div class="modal-left-login" ng-if="userStatus === 'login'">已有账号？登陆</div>
-    		<div class="modal-left-login" ng-if="userStatus === 'signup'">还没有账号？立即注册</div>
+    		<div class="modal-left-login" ng-if="userStatus === 'signup'">已有账号？<span ng-click="changeStatus('login')">登陆</span></div>
+    		<div class="modal-left-login" ng-if="userStatus === 'login'">还没有账号？立即<span ng-click="changeStatus('signup')">注册</span></div>
     	</div>
     	<div class="modal-right">
-	       		<div class="modal-title" >
-	       			<span ng-click="changeStatus('signup')" ng-class="{'modalTitleRed': userStatus === 'signup'}">注册</span>/
-	       			<span ng-click="changeStatus('login')" ng-class="{'modalTitleRed': userStatus === 'login'}">登陆</span>
-	       		</div>
-			  	<div class="modal-form-input">
-				    <input type="text" class="form-control" ng-model="forms.username" placeholder="邮箱">
-			  	</div>
-				<div class="modal-form-input">
-					<input type="password" class="form-control" ng-model="forms.password" placeholder="密码">
-				</div>
-					<div class="modal-submit" ng-if="userStatus === 'login'">注册</div>
-					<div class="modal-submit" ng-if="userStatus === 'signup'">注册</div>
-				<div class="modal-aggrement">点击注册代表您同意并遵守一路游 用户使用协议</div>
+       		<div class="modal-title" >
+       			<span ng-click="changeStatus('signup')" ng-class="{'modalTitleRed': userStatus === 'signup'}">注册</span>/
+       			<span ng-click="changeStatus('login')" ng-class="{'modalTitleRed': userStatus === 'login'}">登陆</span>
+       		</div>
+		  	<div class="modal-form-input" ng-if="userStatus === 'signup'">
+			    <input type="text" class="form-control" ng-model="forms.user" placeholder="用户名">
+		  	</div>
+		  	<div class="modal-form-input">
+			    <input type="email" class="form-control" ng-model="forms.email" placeholder="邮箱">
+		  	</div>
+			<div class="modal-form-input">
+				<input type="password" class="form-control" ng-model="forms.password" placeholder="密码">
+			</div>
+				<div class="modal-submit" ng-if="userStatus === 'login'" ng-click="login()">登陆</div>
+				<div class="modal-submit" ng-if="userStatus === 'signup'" ng-click="signup()">注册</div>
+			<div class="modal-aggrement">点击注册代表您同意并遵守一路游 用户使用协议</div>
 		</div>
 		<div class="modal-close" data-dismiss="modal">
 			<i class="fa fa-times"></i>

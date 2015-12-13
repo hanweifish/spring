@@ -7,10 +7,12 @@ angular.module('app', [
     'app.controllers',
     'app.views',
     'app.directives',
+    'app.shared',
     'ui.router',
     'ui.bootstrap',
     'ngResource',
     'ngMaterial',
+    'ngCookies',
     'toastr'
 ]);
 
