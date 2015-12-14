@@ -20,8 +20,18 @@
 					<li><a ui-sref="main">首页</a></li>
 					<li><a ui-sref="user">我是游客</a></li>
 					<li><a ui-sref="main">我是导游</a></li>
-					<li data-toggle="modal" data-target="#myModal"><a><button class="btn btn-default btn-primary" ng-click="changeStatus('signup')">注册</button></a></li>
-					<li data-toggle="modal" data-target="#myModal"><a><button class="btn btn-default btn-primary" ng-click="changeStatus('login')">登陆</button></a></li>
+					<li ng-if="!isLoggin"><a><button class="btn btn-default btn-primary" ng-click="openModal('signup')" >注册</button></a></li>
+					<li ng-if="!isLoggin"><a><button class="btn btn-default btn-primary" ng-click="openModal('login')">登陆</button></a></li>
+
+					<li ng-if="isLoggin" ng-mouseenter="ShowDropdown()" ng-mouseleave="HideDropdown()"> 
+						<a class="header-dropdown" > 欢迎: {{loginName}} <span class="caret"></span></a>
+						<div class="header-dropdown-manu" ng-if="showDropdownStatus" ng-mouseleave="HideDropdown()">
+							<div>个人中心</div>
+							<div ng-click="logout()">退出</div>				  
+							</ul>
+						</div>
+					</li>
+
 				</ul>
 
 			</div>
@@ -29,47 +39,3 @@
 		</div>
 	</nav>
 </header>
-
-
-<!-- Modal Login-->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-divledby="myModaldiv">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="modal-left">
-    		<div class="modal-left-icon"><i class="fa fa-skype fa-2x"></i></div>
-    		<div class="modal-left-title" ng-if="userStatus === 'signup'">欢迎加入</div>
-      		<div class="modal-left-title" ng-if="userStatus === 'login'">欢迎回来</div>
-    		<div class="modal-left-oauth">
-    			<i class="fa fa-qq"></i>
-    			<i class="fa fa-weixin"></i>
-    		</div>
-    		<div class="modal-left-login" ng-if="userStatus === 'signup'">已有账号？<span ng-click="changeStatus('login')">登陆</span></div>
-    		<div class="modal-left-login" ng-if="userStatus === 'login'">还没有账号？立即<span ng-click="changeStatus('signup')">注册</span></div>
-    	</div>
-    	<div class="modal-right">
-       		<div class="modal-title" >
-       			<span ng-click="changeStatus('signup')" ng-class="{'modalTitleRed': userStatus === 'signup'}">注册</span>/
-       			<span ng-click="changeStatus('login')" ng-class="{'modalTitleRed': userStatus === 'login'}">登陆</span>
-       		</div>
-		  	<div class="modal-form-input" ng-if="userStatus === 'signup'">
-			    <input type="text" class="form-control" ng-model="forms.user" placeholder="用户名">
-		  	</div>
-		  	<div class="modal-form-input">
-			    <input type="email" class="form-control" ng-model="forms.email" placeholder="邮箱">
-		  	</div>
-			<div class="modal-form-input">
-				<input type="password" class="form-control" ng-model="forms.password" placeholder="密码">
-			</div>
-				<div class="modal-submit" ng-if="userStatus === 'login'" ng-click="login()">登陆</div>
-				<div class="modal-submit" ng-if="userStatus === 'signup'" ng-click="signup()">注册</div>
-			<div class="modal-aggrement">点击注册代表您同意并遵守一路游 用户使用协议</div>
-		</div>
-		<div class="modal-close" data-dismiss="modal">
-			<i class="fa fa-times"></i>
-		</div>
-      </div>
-
-    </div>
-  </div>
-</div>

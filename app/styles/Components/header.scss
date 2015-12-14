@@ -36,3 +36,24 @@ header li button {
 	background: white;
 }
 
+.header-dropdown {
+  
+}
+
+.header-dropdown-manu {
+  position: absolute;
+  background: white;
+  font-size: 1.3rem;
+  width: 100%;
+  cursor: pointer;
+}
+
+.header-dropdown-manu>div {
+  padding: 10px;
+}
+
+.header-dropdown-manu>div:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+

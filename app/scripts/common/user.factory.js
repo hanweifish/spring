@@ -6,11 +6,12 @@ angular.module('app.shared', [])
         '$rootScope',
         '$resource',
         '$state',
+        '$cookies',
         'Controller',
         UserFactory
     ]);
 
-function UserFactory($rootScope, $resource, $state, Controller) {
+function UserFactory($rootScope, $resource, $state, $cookies, Controller) {
 
     /**
      * Creates a new User
@@ -19,11 +20,10 @@ function UserFactory($rootScope, $resource, $state, Controller) {
     function User() {
         // only these fields will be persisted
         this.persistentData = {
-            token: {},
+            token: '',
             loggedIn: false,
-            displayNodeLevels: undefined,
-            currNode: undefined,
-            username: ''
+            username: '',
+            email:''
         };
 
         // // non persisted properties
@@ -41,25 +41,24 @@ function UserFactory($rootScope, $resource, $state, Controller) {
     }
 
     User.prototype.signup = function(auth) {
-        console.log(Controller.base());
-        return $resource(Controller.base() + 'api/login')
+        return $resource(Controller.base() + 'api/signup')
             .save(auth).$promise
-            .then(function(res) {
-                console.log(res)
-                // var parsedToken = parseUserToken(res);
-                // this.persistentData.token = parsedToken;
-                // this.persistentData.loggedIn = true;
-                // this.persistentData.username = auth.UserName;
+            // .then(function(res) {
 
-                // // save new persistentData
-                // this.setToLocalStorage();
-                // Token.token = this.persistentData.token;
+            //     // var parsedToken = parseUserToken(res);
+            //     // this.persistentData.token = parsedToken;
+            //     // this.persistentData.loggedIn = true;
+            //     // this.persistentData.username = auth.UserName;
 
-                // // reset expire timer to new expire time
-                // clearTimeout(this.expireTimer);
-                // var timeout = this.persistentData.token.expires - Date.now();
-                // this.expireTimer = timer(timeout, this.logout.bind(this));
-            });
+            //     // // save new persistentData
+            //     // this.setToLocalStorage();
+            //     // Token.token = this.persistentData.token;
+
+            //     // // reset expire timer to new expire time
+            //     // clearTimeout(this.expireTimer);
+            //     // var timeout = this.persistentData.token.expires - Date.now();
+            //     // this.expireTimer = timer(timeout, this.logout.bind(this));
+            // });
     };
 
     /**
@@ -72,25 +71,24 @@ function UserFactory($rootScope, $resource, $state, Controller) {
      * @param {String} auth.Password
      */
     User.prototype.login = function(auth) {
-        console.log(Controller.base());
         return $resource(Controller.base() + 'api/login')
             .save(auth).$promise
-            .then(function(res) {
-                console.log(res)
-                // var parsedToken = parseUserToken(res);
-                // this.persistentData.token = parsedToken;
-                // this.persistentData.loggedIn = true;
-                // this.persistentData.username = auth.UserName;
+            // .then(function(res) {
+            //     console.log(res)
+            //     // var parsedToken = parseUserToken(res);
+            //     // this.persistentData.token = parsedToken;
+            //     // this.persistentData.loggedIn = true;
+            //     // this.persistentData.username = auth.UserName;
 
-                // // save new persistentData
-                // this.setToLocalStorage();
-                // Token.token = this.persistentData.token;
+            //     // // save new persistentData
+            //     // this.setToLocalStorage();
+            //     // Token.token = this.persistentData.token;
 
-                // // reset expire timer to new expire time
-                // clearTimeout(this.expireTimer);
-                // var timeout = this.persistentData.token.expires - Date.now();
-                // this.expireTimer = timer(timeout, this.logout.bind(this));
-            });
+            //     // // reset expire timer to new expire time
+            //     // clearTimeout(this.expireTimer);
+            //     // var timeout = this.persistentData.token.expires - Date.now();
+            //     // this.expireTimer = timer(timeout, this.logout.bind(this));
+            // });
     };
 
 
@@ -132,18 +130,12 @@ function UserFactory($rootScope, $resource, $state, Controller) {
      * clears the expire time
      */
     User.prototype.logout = function() {
-        this.clearFromLocalStorage();
-        // clear in memory persistent data
-        for (var prop in this.persistentData) delete this.persistentData[prop];
-        this.displayNodeLevels.length = 0;
-        this.currNode = undefined;
+        var cookies = $cookies.getAll();
+            _.each(cookies, function (v, k) {
+                $cookies.remove(k);
+        });
 
-        // clear resources
-        Resources.prune();
-        Controller.connected = false;
-        // disconnect socket connection
-        DataManager.disconnect();
-        clearTimeout(this.expireTimer);
+        // clearTimeout(this.expireTimer);
 
         if (!$rootScope.$$phase) $rootScope.$apply();
     }

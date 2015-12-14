@@ -8,9 +8,12 @@ angular.module('app.directives')
         restrict: 'E',
         templateUrl: 'scripts/directives/travellerBanner/travellerBanner.tpl.html',
         controller: 'BannerCtrl',
-        link: function (scope, iElement, iAttrs) {
-        }
+        link: linkFunc
     };
 }]);
+
+
+function linkFunc (scope, elem, attrs) {
+}
 
 })();
