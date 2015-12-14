@@ -21,11 +21,6 @@ function HeaderModalCtrl($scope, $modalInstance, $http, $cookies, $cookieStore, 
 
 	$scope.forms = {};
 
-	$scope.forms.username = 'test123';
-	$scope.forms.email = 'test@gmail.com';
-	$scope.forms.password = 'test';
-
-
 	$scope.closeModal = function(){
     	$modalInstance.close();
   	}
@@ -41,7 +36,7 @@ function HeaderModalCtrl($scope, $modalInstance, $http, $cookies, $cookieStore, 
 	        if (res.status === 'SUCCESS') {
 				$cookieStore.put('username', $scope.forms.username);
 				$cookieStore.put('token', res.token);
-				$cookieStore.put('isLogged', true);
+				$cookieStore.put('isLoggin', true);
 				$modalInstance.close();
 				$scope.$parent.updateHeader();
 	          	toastr.success('Signup Success', '');    
@@ -60,6 +55,8 @@ function HeaderModalCtrl($scope, $modalInstance, $http, $cookies, $cookieStore, 
       	User.login(forms)
         .then(function(res) {
             if (res.status === 'SUCCESS') {
+            	console.log($scope.forms.username);
+            	console.log(typeof $scope.forms.username);
 				$cookieStore.put('username', $scope.forms.username);
 				$cookieStore.put('token', res.token);
 				$cookieStore.put('isLoggin', true);
@@ -81,6 +78,7 @@ function HeaderModalCtrl($scope, $modalInstance, $http, $cookies, $cookieStore, 
     function callback(user) 
       {
         var userName = document.getElementById('userName');
+        console.log(user.openid);
         var greetingText = document.createTextNode('Greetings, '+ user.openid + '.');
         userName.appendChild(greetingText);
       }
@@ -88,7 +86,7 @@ function HeaderModalCtrl($scope, $modalInstance, $http, $cookies, $cookieStore, 
       //应用的APPID，请改为你自己的
       var appID = "101277978";
       //成功授权后的回调地址，请改为你自己的
-      var redirectURI = "http://www.legovictor.com";
+      var redirectURI = "http://www.legovictor.com/user/snsLogin";
 
       //构造请求
       console.log(window.location.hash);
@@ -107,6 +105,7 @@ function HeaderModalCtrl($scope, $modalInstance, $http, $cookies, $cookieStore, 
       {
         //获取access token
         var accessToken = window.location.hash.substring(1);
+        console.log(accessToken);
         //使用Access Token来获取用户的OpenID
         var path = "https://graph.qq.com/oauth2.0/me?";
         var queryParams = [accessToken, 'callback=callback'];

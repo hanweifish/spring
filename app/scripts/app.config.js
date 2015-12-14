@@ -11,7 +11,7 @@ angular.module('app')
 ])
 
 function AppConfig ($stateProvider, $httpProvider, $urlRouterProvider, $resourceProvider) {
-    // Setting default route to display dashboard
+    // Setting default route to display index
     $urlRouterProvider.otherwise('/main');
 
 
