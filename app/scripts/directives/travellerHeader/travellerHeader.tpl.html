@@ -23,7 +23,7 @@
 					<li ng-if="!isLoggin"><a><button class="btn btn-default btn-primary" ng-click="openModal('signup')" >注册</button></a></li>
 					<li ng-if="!isLoggin"><a><button class="btn btn-default btn-primary" ng-click="openModal('login')">登陆</button></a></li>
 
-					<li ng-if="isLoggin" ng-mouseenter="ShowDropdown()" ng-mouseleave="HideDropdown()"> 
+					<li ng-if="isLoggin" ng-mouseenter="ShowDropdown()" ng-mouseleave="HideDropdown()" style="cursor: pointer"> 
 						<a class="header-dropdown" > 欢迎: {{loginName}} <span class="caret"></span></a>
 						<div class="header-dropdown-manu" ng-if="showDropdownStatus" ng-mouseleave="HideDropdown()">
 							<div>个人中心</div>
@@ -31,9 +31,7 @@
 							</ul>
 						</div>
 					</li>
-
 				</ul>
-
 			</div>
 
 		</div>

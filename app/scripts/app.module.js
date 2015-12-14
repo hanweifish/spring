@@ -13,7 +13,7 @@ angular.module('app', [
     'ngResource',
     'ngMaterial',
     'ngCookies',
-    'toastr'
+    'toastr',
 ]);
 
 

@@ -7,14 +7,15 @@ angular.module('app.controllers')
 .controller('HeaderCtrl', [
     '$scope',
     '$modal',
-    '$cookies',
+    '$cookieStore',
     '$location',
+    '$window',
     'User',
     HeaderCtrl
 ]);
 
 
-function HeaderCtrl($scope, $modal, $cookies, $location, User) {
+function HeaderCtrl($scope, $modal, $cookieStore, $location, $window, User) {
 
   $scope.User = User;
 
@@ -37,14 +38,14 @@ function HeaderCtrl($scope, $modal, $cookies, $location, User) {
   }
 
   $scope.updateHeader = function() {
-    if($cookies.get('isLoggin') && $cookies.get('username')) {
-      if($cookies.get('isLoggin')) {
+    if($cookieStore.get('isLoggin') && $cookieStore.get('username')) {
+      if($cookieStore.get('isLoggin')) {
         $scope.isLoggin = true;
       } else {
         $scope.isLoggin = false;
       }
-      $scope.loginName = $cookies.get('username');
 
+      $scope.loginName = $cookieStore.get('username');
       // if($cookies.get('is_admin') === 'true') {
       //   $scope.isAdmin = true;
       // } else {
@@ -57,7 +58,7 @@ function HeaderCtrl($scope, $modal, $cookies, $location, User) {
 
   $scope.logout = function(){
     User.logout();
-    $scope.updateHeader();
+    $window.location.reload();
   }
     
 
