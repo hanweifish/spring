@@ -22,7 +22,7 @@ function DashboardConfig ($stateProvider) {
     });
 
     $stateProvider.state('userLogin', {
-        url: '/user/snsLogin*',
+        url: '/userLogin',
         templateUrl: 'scripts/views/user/userLogin.tpl.html',
         controller: 'UserLoginCtrl'
     });

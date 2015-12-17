@@ -1,32 +1,61 @@
+@import 'variables';
+
+
+
 /*Footer*/
 
 footer {
-    background-color: #2E3E4F;
+    background-color: $travelllerGray;
     width: 100%;
     color: white;
-    padding: 40px 0 20px 0;
+    padding: 40px 0 60px 0;
 }
 
 .footer-end {
-  width: 80%;
+  width: 70%;
   margin: 0 auto;
+  font-size: 1.8rem;
+  display: flex;
+
+  .footer-left {
+  	width: 70%;
+  	display: flex;
+  	flex-direction: column;
+  	.footer-lists {
+		display: flex;
+		justify-content: flex-start;
+		font-size: 1.6rem;
+		opacity: 0.7;
+		div {
+			margin: 20px 50px 20px 0 ;
+		}
+	}
+	.footer-copyright {
+		font-size: 1.1rem;
+	}
+  }
+  .footer-right {
+  	display: flex;
+  	div i{
+  		background: white;
+  		color: black;
+  		padding: 10px;
+  		margin: 20px 10px 10px 10px;
+  		font-size: 2rem;
+  		border-radius: 50%;
+  	}
+  	div i:hover {
+		cursor: pointer;
+		opacity: 0.6;		
+  	}
+  }
 }
 
 
-.footer-lists {
-	display: flex;
-	font-size: 1.4rem;
-	opacity: 0.6;
-	justify-content: space-around;
-	width: 60%;
-	margin-bottom: 30px;
-}
+
+
 
 .footer-lists div:hover {
 	cursor: pointer;
 }
 
-.footer-copyright {
-	font-size: 1.3rem;
-	text-align: center;
-}

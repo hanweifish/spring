@@ -14,48 +14,58 @@ angular.module('app.controllers', [])
 function MainCtrl($scope, $http) {
 
 
-    $scope.tours = [
-        {
-            'name': '旧金山',
-            'image': 'images/tour1.jpg'
-        },
-        {
-            'name': '纽约',
-            'image': 'images/tour2.jpg'
-        },
-        {
-            'name': '圣地亚哥',
-            'image': 'images/tour3.jpg'
-        },
-        {
-            'name': '夏威夷',
-            'image': 'images/tour4.jpg'
-        },
-        {
-            'name': '拉斯维加斯',
-            'image': 'images/tour5.jpg'
-        },
-        {
-            'name': '洛杉矶',
-            'image': 'images/tour6.jpg'
-        }
-    ];
+    $scope.tours = {
+        right: [
+            {
+                'name': '旧金山',
+                'image': 'images/tour1.jpg',
+                'description': '想要自由掌控行程节奏？喜欢与众不同的游玩路线？我们能满足旅行'
+            },
+            {
+                'name': '圣地亚哥',
+                'image': 'images/tour3.jpg',
+                'description': '想要自由掌控行程节奏？喜欢与众不同的游玩路线？我们能满足旅行'
+            },
+
+        ],
+
+        middle: [
+            {
+                'name': '夏威夷',
+                'image': 'images/tour4.jpg',
+                'description': '想要自由掌控行程节奏？喜欢与众不同的游玩路线？我们能满足旅行'
+            },
+            {
+                'name': '拉斯维加斯',
+                'image': 'images/tour5.jpg',
+                'description': '想要自由掌控行程节奏？喜欢与众不同的游玩路线？我们能满足旅行'
+            },
+        ],
+
+        left: [
+            {
+                'name': '纽约',
+                'image': 'images/tour2.jpg',
+                'description': '想要自由掌控行程节奏？喜欢与众不同的游玩路线？我们能满足旅行'
+            },
+        ]
+    }
 
 
     $scope.features = [
         {
             'title': '线路定制',
-            'icon': 'fa-plane',
+            'icon': 'images/icon1.png',
             'content': '想要自由掌控行程节奏？喜欢与众不同的游玩路线？我们能满足旅行中的各种小任性，同时让你享受最划算的价格.'
         },
         {
             'title': '导游定制',
-            'icon': 'fa-user',
+            'icon': 'images/icon1.png',
             'content': '想要自由掌控行程节奏？喜欢与众不同的游玩路线？我们能满足旅行中的各种小任性，同时让你享受最划算的价格.'
         },
         {
             'title': '用车定制',
-            'icon': 'fa-suitcase',
+            'icon': 'images/icon1.png',
             'content': '想要自由掌控行程节奏？喜欢与众不同的游玩路线？我们能满足旅行中的各种小任性，同时让你享受最划算的价格.'
         }
     ];

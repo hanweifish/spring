@@ -1,12 +1,10 @@
+@import 'variables';
+
 header {
   width: 100%;
 }
 
-header .navbar-modified {
-  background: rgba(255, 255, 255, 0.7);
-  opacity: 75%;
-  margin: 0;
-}
+
 
 header .navbar-modified .navbar-brand img{
   margin-left: 60%;
@@ -18,23 +16,47 @@ header .navbar-modified .navbar-right{
   margin-right: 5%;
 }
 
-header .navbar-modified .navbar-right a{
-  color: rgba(75, 75, 75, 1);
-  font-size: 14px;
+header .navbar-modified .navbar-right li a{
+  font-size: 1.4rem;
+  color: $traverllerOrange;
 }
 
-header li button {
-  margin-top: -10px;
-  margin-right: -15px;
+.nav-modify li a:hover {
+	background: none;
+  color: $traverllerOrange;
 }
 
-.nav-modify li:nth-last-child(2) a:hover {
-	background: white;
+.nav-modify li {
+    font-size: 1.3rem;
+    color: $traverllerOrange;
+    padding-top: 5px;
+    div {
+      width: 70px;
+      height: 28px;
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 500;
+      border: 2px solid $traverllerOrange;
+      padding-top: 2px; 
+    }
+    div:hover {
+      cursor: pointer;
+      opacity: 0.6;
+    }
+   .headerbutton {
+    color: white;
+    border-radius: 20px;
+    background: $traverllerOrange; 
+
+}
+  .headerbutton2 {
+    border: 2px solid $traverllerOrange;
+    color: $traverllerOrange;
+    border-radius: 20px;
+    background: white;
+  }
 }
 
-.nav-modify li:nth-last-child(1) a:hover {
-	background: white;
-}
 
 .header-dropdown {
   
