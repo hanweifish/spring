@@ -29,17 +29,39 @@ a {
 
 .main-slogon {
   color: white;
-  font-size: 4rem;
-  margin-bottom: 50px;
+  font-size: 5rem;
+  margin: 0 auto;
 }
 
-.main-slogon-sm {
-  width: 100%;
-  text-align: center;
+
+.main-form {
   color: white;
-  font-size: 2rem;
-  margin-bottom: 60px; 
+  width: 45%;
+  display: flex;
+  flex-wrap: wrap;
 }
+
+.main-form-group {
+  display: flex;
+  align-items: center;
+  font-size: 1.6em;
+  width: 45%;
+  justify-content: space-between;
+}
+
+.main-form-group>div {
+  margin-bottom: 20px;
+}
+
+.main-form .form-button {
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+}
+
+
+/*Tour*/
+
 
 .main-tour {
   width: 70%;
@@ -139,31 +161,7 @@ a {
   margin-bottom: 20px;
 }
 
-.main-form {
-  color: white;
-  width: 40%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
 
-.main-form-group {
-  display: flex;
-  align-items: center;
-  font-size: 1.6em;
-  width: 45%;
-  justify-content: space-between;
-}
-
-.main-form-group>div {
-  margin-bottom: 20px;
-}
-
-.main-form .form-button {
-  width: 100%;
-  margin-top: 20px;
-  text-align: center;
-}
 
 
 .main-text {
