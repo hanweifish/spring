@@ -21,6 +21,12 @@ function DashboardConfig ($stateProvider) {
         controller: 'UserCtrl'
     });
 
+    $stateProvider.state('tour', {
+        url: '/tour',
+        templateUrl: 'scripts/views/tour/tour.tpl.html',
+        controller: 'TourCtrl'
+    });
+
     $stateProvider.state('userLogin', {
         url: '/userLogin',
         templateUrl: 'scripts/views/user/userLogin.tpl.html',

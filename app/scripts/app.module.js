@@ -14,6 +14,7 @@ angular.module('app', [
     'ngMaterial',
     'ngCookies',
     'toastr',
+    'ngMap',
 ]);
 
 

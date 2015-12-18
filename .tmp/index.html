@@ -69,17 +69,21 @@
         <script src="../bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
         <script src="../bower_components/angular-aria/angular-aria.js"></script>
         <script src="../bower_components/angular-material/angular-material.js"></script>
+        <script src="../bower_components/ngmap/build/scripts/ng-map.js"></script>
+        <script src="../bower_components/webcomponentsjs/webcomponents.js"></script>
         <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/app.js -->
         <!-- inject:js -->
+        <script src="vendor/googlemaps.js"></script>
         <!-- endinject -->
 
         <!-- inject:scripts -->
         <script src="scripts/views/main/main.controller.js"></script>
         <script src="scripts/views/user/userLogin.controller.js"></script>
         <script src="scripts/views/user/user.controller.js"></script>
+        <script src="scripts/views/tour/tour.controller.js"></script>
         <script src="scripts/directives/travellerHeader/travellerHeader.directive.js"></script>
         <script src="scripts/directives/travellerSelect/travellerSelect.directive.js"></script>
         <script src="scripts/directives/travellerSelect/travellerSelect.controller.js"></script>

@@ -7,11 +7,12 @@ angular.module('app.controllers')
 .controller('BannerCtrl', [
     '$scope',
     '$http',
+    '$state',
     BannerCtrl
 ]);
 
 
-function BannerCtrl($scope, $http) {
+function BannerCtrl($scope, $http, $state) {
     $scope.tourShow = false;
 	$scope.tourForm = {};
 	$scope.options = {};
@@ -109,26 +110,26 @@ function BannerCtrl($scope, $http) {
 	$scope.tourForm.Depart = $scope.options.depart[0].name
 
     $scope.submitTour = function() {
-        $scope.tourShow = true;
+        $state.go('tour');
     }
 
     //For Date Picker
-  $scope.myDate = new Date();
+	$scope.myDate = new Date();
 
-  $scope.minDate = new Date(
-      $scope.myDate.getFullYear(),
-      $scope.myDate.getMonth() - 2,
-      $scope.myDate.getDate());
+	$scope.minDate = new Date(
+	  $scope.myDate.getFullYear(),
+	  $scope.myDate.getMonth() - 2,
+	  $scope.myDate.getDate());
 
-  $scope.maxDate = new Date(
-      $scope.myDate.getFullYear(),
-      $scope.myDate.getMonth() + 2,
-      $scope.myDate.getDate());
-  
-  $scope.onlyWeekendsPredicate = function(date) {
-    var day = date.getDay();
-    return day === 0 || day === 6;
-  }
+	$scope.maxDate = new Date(
+	  $scope.myDate.getFullYear(),
+	  $scope.myDate.getMonth() + 2,
+	  $scope.myDate.getDate());
+
+	$scope.onlyWeekendsPredicate = function(date) {
+	var day = date.getDay();
+	return day === 0 || day === 6;
+	}
 
 }
 
