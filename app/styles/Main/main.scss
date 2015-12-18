@@ -11,8 +11,6 @@ a {
   color: #00B7FF;
 }
 
-
-
 /*Main*/
 .main-banner {
   margin: 10px 0;
@@ -29,7 +27,7 @@ a {
 
 .main-slogon {
   color: white;
-  font-size: 4.5rem;
+  font-size: 4rem;
   margin: 0 auto;
 }
 
@@ -243,15 +241,45 @@ a {
     width: 100%;
   }
   .main-map-points {
+    background-image:url(../images/location.png);
+    background-size: cover;
+    width: 100px;
+    height: 80px;
     position: absolute;
+    p {
+      color: $traverllerOrange;
+      font-weight: 500;
+      font-size: 1.3rem;
+      padding-top: 30px;
+    }
+    &:hover {
+      cursor: pointer;
+      opacity: 0.7;
+    }
   }
   .point-NY {
     top: 20%;
     left: 40%;
   }
+  .point-NY2 {
+    top: 10%;
+    left: 50%;
+  }
+  .point-NY3{
+    top: 10%;
+    left: 30%;
+  }
   .point-SF {
-    top: 40%;
-    left: 20%;    
+    top: 30%;
+    left: 55%;    
+  }
+  .point-SF2 {
+    top: 30%;
+    left: 35%;    
+  }
+  .point-SF3 {
+    top: 0;
+    left: 40%;    
   }
 }
 

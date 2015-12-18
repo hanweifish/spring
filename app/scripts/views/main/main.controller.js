@@ -18,12 +18,12 @@ function MainCtrl($scope, $http) {
         right: [
             {
                 'name': '旧金山',
-                'image': 'images/tour1.jpg',
+                'image': 'images/city2.jpg',
                 'description': '想要自由掌控行程节奏？喜欢与众不同的游玩路线？我们能满足旅行'
             },
             {
                 'name': '圣地亚哥',
-                'image': 'images/tour3.jpg',
+                'image': 'images/city3.jpg',
                 'description': '想要自由掌控行程节奏？喜欢与众不同的游玩路线？我们能满足旅行'
             },
 
@@ -32,12 +32,12 @@ function MainCtrl($scope, $http) {
         middle: [
             {
                 'name': '夏威夷',
-                'image': 'images/tour4.jpg',
+                'image': 'images/city4.jpg',
                 'description': '想要自由掌控行程节奏？喜欢与众不同的游玩路线？我们能满足旅行'
             },
             {
                 'name': '拉斯维加斯',
-                'image': 'images/tour5.jpg',
+                'image': 'images/city5.jpg',
                 'description': '想要自由掌控行程节奏？喜欢与众不同的游玩路线？我们能满足旅行'
             },
         ],
@@ -45,7 +45,7 @@ function MainCtrl($scope, $http) {
         left: [
             {
                 'name': '纽约',
-                'image': 'images/tour2.jpg',
+                'image': 'images/city1.jpg',
                 'description': '想要自由掌控行程节奏？喜欢与众不同的游玩路线？我们能满足旅行'
             },
         ]
