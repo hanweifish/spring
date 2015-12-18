@@ -16,10 +16,10 @@ a {
 /*Main*/
 .main-banner {
   margin: 10px 0;
-  background-image:url(../images/banner1_meitu_1.jpg);
+  background-image:url(../images/banner.jpg);
   background-repeat: no-repeat;
   width: 100%;
-  height: 600px;
+  height: 500px;
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -29,7 +29,7 @@ a {
 
 .main-slogon {
   color: white;
-  font-size: 5rem;
+  font-size: 4.5rem;
   margin: 0 auto;
 }
 
@@ -71,11 +71,13 @@ a {
 .tourgrid {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
   .tourgrid-section {
     flex: 1;
     display: flex;
     flex-direction: column;
     margin: 10px;
+    min-width: 200px;
   }
 
 }
@@ -145,14 +147,14 @@ a {
 }
 
 
-.main-tour p, .main-feature p, .main-corp p{
+.main-tour p, .main-feature p, .main-corp p, .main-map p{
   text-align: center;
   font-size: 3.5rem;
   font-weight: 600;
   color: $traverllerOrange;
 }
 
-.main-tour .p-sm, .main-feature .p-sm, .main-corp .p-sm{
+.main-tour .p-sm, .main-feature .p-sm, .main-corp .p-sm, .main-map .p-sm{
   text-align: center;
   font-size: 2rem;
   font-weight: 400;
@@ -224,17 +226,34 @@ a {
 
 
 .main-map {
-  margin: 100px 0 40px 0;
-  background-image:url(../images/fackmap.png);
+  margin: 80px auto 40px auto;
+  background: #e5e5e5 ;
   background-repeat: no-repeat;
   width: 100%;
-  height: 650px;
   background-size: cover;
+  position: relative;
+  .main-map-body {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 30px;
+  }
+  .main-map-img img {
+    width: 100%;
+  }
+  .main-map-points {
+    position: absolute;
+  }
+  .point-NY {
+    top: 20%;
+    left: 40%;
+  }
+  .point-SF {
+    top: 40%;
+    left: 20%;    
+  }
 }
-
-
-
-
 
 
 

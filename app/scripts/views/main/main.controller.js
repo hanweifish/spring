@@ -55,17 +55,17 @@ function MainCtrl($scope, $http) {
     $scope.features = [
         {
             'title': '线路定制',
-            'icon': 'images/icon1.png',
+            'icon': 'images/merit1.png',
             'content': '想要自由掌控行程节奏？喜欢与众不同的游玩路线？我们能满足旅行中的各种小任性，同时让你享受最划算的价格.'
         },
         {
             'title': '导游定制',
-            'icon': 'images/icon1.png',
+            'icon': 'images/merit2.png',
             'content': '想要自由掌控行程节奏？喜欢与众不同的游玩路线？我们能满足旅行中的各种小任性，同时让你享受最划算的价格.'
         },
         {
             'title': '用车定制',
-            'icon': 'images/icon1.png',
+            'icon': 'images/merit3.png',
             'content': '想要自由掌控行程节奏？喜欢与众不同的游玩路线？我们能满足旅行中的各种小任性，同时让你享受最划算的价格.'
         }
     ];
