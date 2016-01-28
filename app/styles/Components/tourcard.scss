@@ -1,0 +1,63 @@
+@import 'variables';
+
+.tour-card {
+	font-size: 1.2rem;
+	.card-header img{
+		width: 100%;
+	}
+	.card-title {
+		display: flex;
+		justify-content: space-between;
+		padding: 5px 20px;
+		font-size: 1.3rem;
+		font-weight: 500;
+		background: $traverllerOrange;
+		color: white;
+	}
+	.card-content {
+		background: $travellerLightGray;
+		padding: 10px 20px;
+		&>div {
+			margin: 10px 0;
+		}
+		.tour-info {
+			display: flex;
+			div:not(:last-child)::after {
+				content: ' - ';
+			}
+		}
+		.tour-time {
+			display: flex;
+			div:last-child {
+				margin-left: 20px;
+			}
+		}
+		.tag {
+			width: 40%;
+			padding: 5px;
+			font-size: 1.3rem;
+			border-radius: 5px;
+			color: white;
+			background: orange;
+			text-align: center;
+		}
+	}
+	.card-footer {
+		background: $travellerLightGray;
+		display: flex;
+		padding: 0 20px 10px 20px;
+		div {
+			padding: 0 10px;
+			&:hover {
+				cursor: pointer;
+				opacity: 0.7;
+			}
+		}
+		div:not(:last-child){
+			border-right: 1px solid $travellerGrayFont;
+		}
+		div:first-child{
+			padding-left: 0;
+		}
+	}
+}

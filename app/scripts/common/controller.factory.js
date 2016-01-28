@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('app.shared')
-.factory('Controller', [
+    .factory('Controller', [
     '$resource',
     '$http',
     ControllerFactory
@@ -19,12 +19,12 @@ function ControllerFactory($resource, $http) {
         this.persistentData = {
             scheme: 'http',
             host: '106.184.1.83',
+            // host:'54.213.193.97',
             port: '8080',
-            prefix: 'oneroadtrip6',
+            prefix: '',
             version: 'v1.0'
         };
 
-        // this.getFromLocalStorage();
     }
 
 

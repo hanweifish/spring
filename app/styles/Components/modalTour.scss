@@ -1,18 +1,23 @@
 @import 'variables';
 
-
-
 .banner-form-group {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	margin: 10px 0;
 	div {
-		width: 100%;
 		margin-right: 10px;
 	}
 	div:last-child {
 		margin-right: 0;
+	}
+	input {
+		width: 100%;
+		border-radius: 5px;
+		height: 50px;
+		font-size: 1.3rem;
+		padding-left: 35px;
+		color: #B1B1B1;
 	}
 }
 
@@ -23,7 +28,23 @@
 		display: flex;
 		width: 100%;
 		flex: 1;
-		i {
+		img {
+			width: 30px;
+			height: 30px;
+			margin-top: 9px;
+			margin-right: -32px;
+			z-index: 100;
+		}
+		.datediff {
+			color: $travelllerGray;
+			font-size: 1.5rem;
+			width: 80px;
+			height: 30px;
+			margin-top: 15px;
+			margin-left: -90px;
+			z-index: 100;
+		}
+		span:nth-of-type(1) i {
 			font-size: 1.3rem;
 			margin: 0;
 			background: $traverllerOrange;
@@ -31,6 +52,20 @@
 			padding: 4px;
 			margin-left: -30px;
 			margin-top: 14px;
+		}
+		span:nth-of-type(2) {
+			font-weight: 600;
+			color: $traverllerOrange;
+		}
+		span:nth-of-type(2) i{
+			font-size: 1.3rem;
+			margin: 0;
+			color: $traverllerOrange;
+			margin-left: -10px;
+			margin-top: 0;
+			.popover {
+
+			}
 		}
 		i:hover {
 			cursor:pointer;
@@ -42,6 +77,47 @@
 		border-radius: 5px;
 		height: 50px;
 		font-size: 1.5rem;
+		padding-left: 35px;
+	}
+	.inputdiv {
+		background: white;
+		width: 100%;
+		height: 100%;
+		min-height: 50px;
+		border-radius: 5px;
+		font-size: 1.5rem;
+		color: #B1B1B1;
+		margin: 0;
+		padding: 0 35px;
+		.controllerInput {
+			float: left;
+			padding: 0;
+			border: none;
+		}
+		span {
+			color: red;
+		}
+		.cityshow {
+			float: left;
+			display:flex;
+			background: $traverllerOrange;
+			color: white;
+			font-size: 1.2rem;
+			font-weight: 600;
+			height: 30px;
+			border-radius: 5px;
+			margin: 5px;
+			padding: 6px;
+			i {
+				font-size: 1rem;
+			}
+			&:hover {
+				cursor:pointer;
+				i {
+					display: block;
+				}
+			}
+		}
 	}
 }
 
@@ -49,18 +125,20 @@
 	position: absolute;
 	padding: 10px;
 	width: 100%;
-	background: #CCCCCC;
+	max-height: 150px;
+	overflow: auto;
+	background: white;
 	border-radius: 5px;
-	color: white;
+	color: #BABABA;
 	font-size: 1.4rem;
-	font-weight: 600;
-	opacity: 0.9;
-	z-index: 99;
+	font-weight: 500;
+	z-index: 199;
+
 }
 
 .selectlayer p:hover {
 	cursor: pointer;
-	color: red;
+	color: $traverllerOrange;
 }
 
 .main-form .form-button button{

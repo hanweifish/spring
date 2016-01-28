@@ -10,12 +10,15 @@ angular.module('app.controllers')
     '$cookieStore',
     '$location',
     '$window',
+    '$rootScope',
+    '$state',
     'User',
+    'AUTH_EVENTS',
     HeaderCtrl
 ]);
 
 
-function HeaderCtrl($scope, $modal, $cookieStore, $location, $window, User) {
+function HeaderCtrl($scope, $modal, $cookieStore, $location, $window, $rootScope, $state, User, AUTH_EVENTS) {
 
   $scope.User = User;
 
@@ -28,6 +31,10 @@ function HeaderCtrl($scope, $modal, $cookieStore, $location, $window, User) {
       controller: 'HeaderModalCtrl'
     });
   }
+
+  $rootScope.$on(AUTH_EVENTS.notAuthenticated, function(){
+    $scope.openModal('login');
+  })
 
   $scope.HideDropdown = function() {
     $scope.showDropdownStatus = false;
@@ -45,7 +52,8 @@ function HeaderCtrl($scope, $modal, $cookieStore, $location, $window, User) {
         $scope.isLoggin = false;
       }
 
-      $scope.loginName = $cookieStore.get('username');
+      $scope.loginName = $cookieStore.get('nickname') || $cookieStore.get('username');
+      $scope.userImage = $cookieStore.get('userimage');
       // if($cookies.get('is_admin') === 'true') {
       //   $scope.isAdmin = true;
       // } else {
@@ -57,10 +65,14 @@ function HeaderCtrl($scope, $modal, $cookieStore, $location, $window, User) {
   };
 
   $scope.logout = function(){
-    User.logout();
-    $window.location.reload();
+    User.logout().then(function(){
+          $scope.updateHeader();
+          $state.go('main');
+          $window.location.reload();
+        }
+      )
   }
-    
+
 
   $scope.updateHeader();
 

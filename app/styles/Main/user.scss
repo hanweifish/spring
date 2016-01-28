@@ -1,0 +1,137 @@
+.user_info_page {
+	width: 100%;
+	min-height: 450px;
+	margin: 0 auto;
+	padding: 50px 0;
+	background: $travellerLightGray;
+	&>div {
+		background: white;
+		width: 70%;
+		margin: 20px auto;
+		display: flex;
+	}
+}
+
+.user_info_maue{
+	padding: 30px 10px;
+	.user-icon {
+		flex:3;
+		display: flex;
+		position: relative;
+		img {
+			width: 20%;
+			border-radius: 50%;
+			position: absolute;
+			top: -80px;
+			left: 50px;
+		}
+		div {
+			padding-left: 200px;
+			font-size: 2rem;
+			color: $traverllerOrange;
+			font-weight: 600;
+		}
+	}
+	.user-right {
+		flex: 2;
+		display: flex;
+		justify-content: space-around;
+		div:first-child {
+			padding-left: 50px;
+			border-left: 1px solid $traverllerOrange;
+		}
+		a {
+			font-size: 1.5rem;
+			color: $traverllerOrange;
+			font-weight: 600;
+			&:hover {
+				opacity: 0.7;
+				text-decoration:none;
+			}
+		}
+	}
+
+}
+
+.user_info_content {
+	font-size: 1.5rem;
+	margin-bottom: 20px;
+}
+
+.user_info {
+	padding: 20px 40px;
+	width: 100%;
+	&>div {
+		padding: 20px 40px;
+	}
+	.infoheader{
+		color: $traverllerOrange;
+	}
+	.infocontent {
+		width: 40%;
+	}
+	.item {
+		margin-bottom: 10px;
+		display: flex;
+		div {
+			flex: 1;
+		}
+	}
+	.button {
+		background: $traverllerOrange;
+		color: white;
+		border-radius: 15px;
+		padding: 0 20px;
+		font-size: 1.4rem;
+		font-weight: 600;
+		margin-top: 20px;
+		&:hover {
+			opacity: 0.6;
+		}
+	}
+	.resetpwd {
+		margin: 40px 0;
+	}
+	input {
+		border: 1px solid gray;
+		border-radius: 5px;
+		padding: 5px;
+	}
+}
+
+.bookingpage {
+	width: 100%;
+	.bookingheader {
+		display: flex;
+		justify-content: space-between;
+		padding: 20px 40px;
+		color: $traverllerOrange;
+		div:last-child {
+			background: $traverllerOrange;
+			color: white;
+			padding: 8px 10px;
+			border-radius: 5px;
+			font-size: 1.3rem;
+			font-weight: 500;
+			cursor:pointer;
+		}
+	}
+	.bookingcontent {
+		display: flex;
+		flex-wrap: wrap;
+		padding: 20px 40px;
+		.tourcard {
+			width: 30%;
+			min-width: 250px;
+			margin-right: 20px;
+			margin-bottom: 30px;
+		}
+	}
+}
+
+
+
+
+
+
+

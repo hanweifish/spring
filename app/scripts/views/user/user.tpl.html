@@ -1,1 +1,17 @@
-traveller
+<div class="user_info_page">
+    <div class="user_info_maue">
+        <div class="user-icon">
+        	<img src="images/header.png">
+        	<div>{{User.user_info.user_name}}</div>
+        </div>
+        <div class="user-right">
+            <div><a ui-sref="user.booking" ui-sref-active="active">行程</a></div>
+            <div><a ui-sref="user.order" ui-sref-active="active">订单</a></div>
+            <div><a ui-sref="user.info" ui-sref-active="active">账号设置</a></div>
+        </div>
+    </div>
+
+    <div class="user_info_content" ui-view></div>
+
+</div>
+

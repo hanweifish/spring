@@ -1,0 +1,213 @@
+<div class="reviewPage">
+	<div class="reviewtitle">
+		<div ng-class="{opacity75:status !== 1}">确认订单</div>
+		<div ng-class="{opacity75:status == 1}">签约付款</div>
+		<div ng-class="{opacity50:status == 1, opacity75:status == 2}">预约成功</div>
+	</div>
+
+	<div class="reviewbody">
+		<div class="order" ng-if="status === 1">
+			<div class="header">出游信息</div>
+			<div class="content">
+				<div class="sectionheader">
+					<div class="orderleft">
+						<div><span>名称: </span><span>{{itinerary.start_city.cn_name}}几日游</span> </div>
+						<div><span>人数: </span><span>{{itinerary.num_people}}</span> </div>
+						<div><span>行程: </span></div>
+					</div>
+					<div class="orderright">
+						<div>
+							<span>线路:</span>
+							<span ng-repeat="city in itinerary.city" class="citynamelink">
+								{{city.city.cn_name}}
+							</span>
+						</div>
+						<div><span>房间数: </span><span>{{itinerary.num_room}}</span></div>
+						<div><span>导游: </span></div>
+					</div>
+				</div>
+
+				<div class="sectionbody">
+					<div ng-repeat="city in itinerary.city" class="sectionbodycontent">
+						<div class="orderleft">
+							<div ng-repeat="plan in city.plans" class="tourspotall">
+								<div class="tourspot">
+									<div>{{city.city.cn_name}}</div>
+									<div>
+										<span><i class="fa fa-camera-retro"></i> 景点: </span>
+										<span ng-repeat="spot in plan.spot">{{spot.info.name}}
+										</span>
+									</div>
+									<div>
+										<span><i class="fa fa-home"></i> 住宿: </span>
+									</div>
+								</div>
+<!-- 								<div class="spotday">第{{$index}}天</div> -->
+							</div>
+						</div>
+
+						<div class="orderright">
+							<div class="guide-content-section">
+								<div class="guide-section-left">
+									<img ng-src="/images/guide/person.png" ng-click="openGuideModal(guide)">
+								</div>
+								<div class="guide-section-middle">
+									<div class="middle-header">
+										<div>{{city.guide[0].name}}</div>
+										<div class="stars">
+				                    		<i class="fa fa-star"></i>
+				                    		<i class="fa fa-star"></i>
+						                    <i class="fa fa-star"></i>
+						                    <i class="fa fa-star"></i>
+						                    <i class="fa fa-star-o"></i>
+				                		</div>
+									</div>
+									<hr>
+									<div>导游经验: {{city.guide[0].description}}
+									</div>
+									<div>
+										服务城市: <div ng-repeat="city in guide.cover_city">{{city.guide[0].cn_name}}</div>
+									</div>
+
+									<div>
+										用车: {{city.guide[0].car}}
+									</div>
+<!-- 									<div class="drivetagsummary">
+										标签: <div ng-repeat="tag in city.guide[0].topic" class="drivetag">{{tag}}</div>
+									</div> -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="footer">
+				<div>确认支付</div>
+				<div><input type="checkbox"> 我同意<span>预订说明及条款</span>和<span>隐私保护政策</span></div>
+			</div>
+
+		</div>
+
+		<div class="payment" ng-if="status === 2">
+			<div class="header">
+				选择付款方式
+			</div>
+			<div class="paymentall">
+				<div class="paymentmethod">
+					<div>
+						<img src="images/weixin.jpg">
+					</div>
+
+					<div>
+						<button class="btn" stripe-checkout="doCheckout"
+				            data-key="pk_test_AaRZsutnFQGtp5rrZ6T7FvuI"
+				            data-name="OneRoadTrip"
+				            data-description="Pay Your trip"
+				            data-amount="{{TourInfo.itinerary.order.cost_usd * 100}}"
+				           	data-currency="usd"
+						    data-alipay="true">微信支付
+						</button>
+					</div>
+				</div>
+
+				<div class="paymentmethod">
+					<div>
+						<img src="images/zhifubao.jpg">
+					</div>
+
+					<div>
+						<button class="btn" stripe-checkout="doCheckout"
+				            data-key="pk_test_AaRZsutnFQGtp5rrZ6T7FvuI"
+				            data-name="OneRoadTrip"
+				            data-description="Pay Your trip"
+				            data-amount="{{TourInfo.itinerary.order.cost_usd * 100}}"
+				           	data-currency="usd"
+						    data-alipay="true">支付宝支付
+						</button>
+					</div>
+				</div>
+
+				<div class="paymentmethod" style="margin-top: 70px">
+					<div>
+						<img src="images/yifujin.jpg">
+					</div>
+
+					<div>
+						<button class="btn" stripe-checkout="doCheckout"
+				            data-key="pk_test_AaRZsutnFQGtp5rrZ6T7FvuI"
+				            data-name="OneRoadTrip"
+				            data-description="Pay Your trip"
+				            data-amount="{{TourInfo.itinerary.order.cost_usd * 100}}"
+				           	data-currency="usd"
+						    data-alipay="true">一键支付
+						</button>
+					</div>
+				</div>
+
+				<div class="paymentmethod">
+					<div>
+						<img src="images/stripe.png">
+					</div>
+
+					<div>
+						<button class="btn" stripe-checkout="doCheckout"
+				            data-key="pk_test_AaRZsutnFQGtp5rrZ6T7FvuI"
+				            data-name="OneRoadTrip"
+				            data-description="Pay Your trip"
+				            data-amount="{{itinerary.order.cost_usd * 100}}"
+				           	data-currency="usd"
+						    data-alipay="true">国际信用卡支付
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="confirmation" ng-if="status === 3">
+			<div class="header">
+				预约成功
+			</div>
+			<div class="confirmcontent">
+				<img src="images/comfirm.png">
+
+				<div class="contentbody">
+					<div>
+						您已经成功预订<span>{{itinerary.start_city.cn_name}}八日游</span>, 价值<span> $ {{itinerary.order.cost_usd}}</span>
+					</div>
+					<div>
+						订单号: {{order_id}}
+					</div>
+				</div>
+			</div>
+			<div class="confirmbotton">
+				<button class="btn"><a ui-sref="user.info">个人中心</a></button> <button class="btn"><a ui-sref="main">回首页</a></button>
+			</div>
+		</div>
+	</div>
+
+	<div class="reviewtitle" ng-if="status === 1">
+		<div ng-click="gotostep(2)">去支付</div>
+	</div>
+
+	<div class="reviewtitle"  ng-if="status === 2">
+		<div ng-click="gotostep(1)">上一步</div>
+	</div>
+
+
+<!-- 	<div>
+		<form ng-submit="paymentThroughStripe()">
+		  <script
+		    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+		    data-key="pk_test_o8vBSoWdOOXImHqSIPJvufTV"
+		    data-name="Demo Site"
+		    data-description="2 widgets ($20.00)"
+		    data-amount="2000"
+		    data-currency="usd"
+		    data-alipay="true">
+		  </script>
+		</form>
+
+	</div> -->
+
+</div>

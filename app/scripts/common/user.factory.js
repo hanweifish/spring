@@ -1,17 +1,19 @@
 ;(function() {
 'use strict';
 
-angular.module('app.shared', [])
+angular.module('app.shared')
     .factory('User', [
         '$rootScope',
         '$resource',
         '$state',
         '$cookies',
+        '$cookieStore',
         'Controller',
+        'AUTH_EVENTS',
         UserFactory
     ]);
 
-function UserFactory($rootScope, $resource, $state, $cookies, Controller) {
+function UserFactory($rootScope, $resource, $state, $cookies, $cookieStore, Controller, AUTH_EVENTS) {
 
     /**
      * Creates a new User
@@ -23,42 +25,55 @@ function UserFactory($rootScope, $resource, $state, $cookies, Controller) {
             token: '',
             loggedIn: false,
             username: '',
-            email:''
+            email:'',
+            user_info: {}
         };
 
         // // non persisted properties
         // this.currNode = undefined;
         // this.displayNodeLevels = [];
 
-        // // load from local storage on init
-        // this.getFromLocalStorage();
-        // * set the auth token only use for {@link ApiService} 
+        // * set the auth token only use for {@link ApiService}
         // Token.token = this.persistentData.token;
 
         // // expire timer starts now
         // var timeout = this.persistentData.token.expires - Date.now();
         // this.expireTimer = timer(timeout, this.logout.bind(this));
+
+        // load from local storage on init
+        this.getFromLocalCookie();
     }
 
+    User.prototype.getFromLocalCookie = function(){
+        if($cookieStore.get('isLoggin') && $cookieStore.get('username')) {
+            this.persistentData.loggedIn = $cookieStore.get('isLoggin');
+            this.persistentData.username = $cookieStore.get('username');
+        }
+    };
+
+
     User.prototype.signup = function(auth) {
+        var that = this;
+        var deferred = Q.defer();
         return $resource(Controller.base() + 'api/signup')
             .save(auth).$promise
-            // .then(function(res) {
-
-            //     // var parsedToken = parseUserToken(res);
-            //     // this.persistentData.token = parsedToken;
-            //     // this.persistentData.loggedIn = true;
-            //     // this.persistentData.username = auth.UserName;
-
-            //     // // save new persistentData
-            //     // this.setToLocalStorage();
-            //     // Token.token = this.persistentData.token;
-
-            //     // // reset expire timer to new expire time
-            //     // clearTimeout(this.expireTimer);
-            //     // var timeout = this.persistentData.token.expires - Date.now();
-            //     // this.expireTimer = timer(timeout, this.logout.bind(this));
-            // });
+            .then(function(res) {
+                 if (res.status === 'SUCCESS') {
+                    $cookieStore.put('username', res.user_info.user_name || res.user_info.nick_name);
+                    $cookieStore.put('userimage', res.user_info.picture_url);
+                    $cookieStore.put('token', res.token);
+                    $cookieStore.put('isLoggin', true);
+                    that.persistentData.token = res.token;
+                    that.persistentData.loggedIn = true;
+                    that.persistentData.username = res.user_info.user_name || res.user_info.nick_name;
+                    that.persistentData.user_info = res.user_info;
+                    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                    deferred.resolve(res);
+                } else {
+                    deferred.reject(res);
+                }
+                return deferred.promise;
+        });
     };
 
     /**
@@ -71,24 +86,31 @@ function UserFactory($rootScope, $resource, $state, $cookies, Controller) {
      * @param {String} auth.Password
      */
     User.prototype.login = function(auth) {
+        var that = this;
+        var deferred = Q.defer();
         return $resource(Controller.base() + 'api/login')
             .save(auth).$promise
-            // .then(function(res) {
-            //     console.log(res)
-            //     // var parsedToken = parseUserToken(res);
-            //     // this.persistentData.token = parsedToken;
-            //     // this.persistentData.loggedIn = true;
-            //     // this.persistentData.username = auth.UserName;
+            .then(function(res) {
+                 if (res.status === 'SUCCESS') {
+                    $cookieStore.put('username', auth.username);
+                    $cookieStore.put('token', res.token);
+                    $cookieStore.put('isLoggin', true);
+                    that.persistentData.token = res.token;
+                    that.persistentData.loggedIn = true;
+                    that.persistentData.username = auth.username;
+                    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                    deferred.resolve(res);
+                } else {
+                    deferred.reject(res);
+                }
+                return deferred.promise;
+                // Token.token = this.persistentData.token;
 
-            //     // // save new persistentData
-            //     // this.setToLocalStorage();
-            //     // Token.token = this.persistentData.token;
-
-            //     // // reset expire timer to new expire time
-            //     // clearTimeout(this.expireTimer);
-            //     // var timeout = this.persistentData.token.expires - Date.now();
-            //     // this.expireTimer = timer(timeout, this.logout.bind(this));
-            // });
+                // // reset expire timer to new expire time
+                // clearTimeout(this.expireTimer);
+                // var timeout = this.persistentData.token.expires - Date.now();
+                // this.expireTimer = timer(timeout, this.logout.bind(this));
+            });
     };
 
 
@@ -130,25 +152,28 @@ function UserFactory($rootScope, $resource, $state, $cookies, Controller) {
      * clears the expire time
      */
     User.prototype.logout = function() {
+        for (var prop in this.persistentData) delete this.persistentData[prop];
         var cookies = $cookies.getAll();
             _.each(cookies, function (v, k) {
                 $cookies.remove(k);
         });
 
-        // clearTimeout(this.expireTimer);
+        return Q.resolve();
+    }
 
-        if (!$rootScope.$$phase) $rootScope.$apply();
+
+    User.prototype.resetPassword= function(obj){
+        return $resource(Controller.base() + 'api/resetpwd').save(obj).$promise;
     }
 
     var user = new User();
 
-    // Log user out on unauthorized response
-    $rootScope.$on('unauthorized', function() {
-        user.logout();
-    });
+    // // Log user out on unauthorized response
+    // $rootScope.$on('unauthorized', function() {
+    //     user.logout();
+    // });
 
     return user;
-
 }
 
 

@@ -1,0 +1,247 @@
+@import 'variables';
+
+.reviewPage {
+	width: 100%;
+	padding: 50px;
+	font-size: 1.5rem;
+	background: $travellerLightGray;
+	&>div {
+		width: 70%;
+		margin: 0 auto;
+		background: white;
+	}
+	button {
+		margin-top: 20px;
+		background: $traverllerOrange;
+		color: white;
+		font-weight: bold;
+	}
+	.reviewtitle {
+		font-size: 1.8rem;
+		display: flex;
+		color: white;
+		font-weight: bold;
+		cursor: pointer;
+		div {
+			flex: 1;
+			text-align: center;
+			padding: 10px 0;
+			background: $traverllerOrange;
+		}
+		.opacity75 {
+			opacity: 0.75;
+		}
+		.opacity50 {
+			opacity: 0.5;
+		}
+	}
+	.reviewbody {
+		.header {
+			padding: 20px 40px;
+			color: $traverllerOrange;
+			font-size: 1.8rem;
+			border-bottom: 1px solid  $travellerLightGray;
+		}
+		.content {
+			padding-top: 20px;
+			&>div {
+				padding-left: 40px;
+			}
+			.orderleft {
+				flex: 1;
+			}
+			.orderright {
+				flex: 1;
+			}
+			.sectionheader {
+				display: flex;
+				div {
+					margin-bottom: 10px;
+				}
+				span:first-child {
+					color: $traverllerOrange;
+					padding-right: 10px;
+				}
+				.citynamelink:not(:last-child)::after {
+					content: " - ";
+				}
+			}
+			.sectionbody {
+				.sectionbodycontent {
+					display: flex;
+				}
+				.tourspotall {
+					display: flex;
+					width: 90%;
+				}
+				.tourspot {
+					flex: 7;
+					margin-bottom: 20px;
+					background: $travellerLightGray;
+					padding: 10px 10px 10px 10px;
+					color: $traverllerOrange;
+					div:not(:first-child) {
+						font-size: 1.3rem;
+					}
+					div:first-child {
+						font-weight: 500;
+					}
+				}
+				.spotday {
+					flex: 1;
+					margin-bottom: 20px;
+					text-align: center;
+					color: $traverllerOrange;
+					font-weight: 500;
+					display: flex;
+					align-items: center;
+				}
+				.guide-content-section {
+					margin: 0;
+					padding: 0;
+					.guide-section-left {
+						left: -10px;
+					}
+					.guide-section-middle {
+					background: $travellerLightGray;
+
+					}
+				}
+			}
+		}
+		.footer {
+			border: 1px solid $travellerLightGray;
+			padding: 20px 40px;
+			div:first-child {
+				color: $traverllerOrange;
+				font-size: 2rem;
+				margin-bottom: 20px;
+			}
+			div:last-child {
+				span{
+					color: $traverllerOrange;
+					text-decoration: underline;
+					cursor: pointer;
+				}
+			}
+		}
+	}
+
+
+
+
+	.reviewcontent {
+
+	}
+	.reviewheader {
+		width: 80%;
+		font-weight: 500;
+		display: flex;
+		justify-content: space-around;
+	}
+	.reviewtour {
+		flex: 4;
+		.reviewplan {
+			width: 80%;
+			margin: 15px auto;
+		}
+		.reviewspot {
+			display: flex;
+			justify-content: space-between;
+		}
+	}
+	.reviewguide {
+		flex: 3;
+		display: flex;
+		flex-direction: column;
+
+		.guide-content-section {
+
+
+		}
+		.guide-section-left {
+			left: -20px;
+		}
+	}
+
+	.payment {
+		.paymentall {
+			width: 80%;
+			margin: 0 auto;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-around;
+			padding: 20px;
+		}
+		.paymentmethod {
+			margin: 20px 0;
+			width: 35%;
+			img{
+				width: 100%;
+			}
+		}
+		button {
+			margin: 0;
+			border-radius: 0;
+			width: 100%;
+			background: $travellerLightGray;
+			color: $travelllerGray;
+		}
+	}
+
+	.confirmation {
+		width: 100%;
+		.confirmcontent {
+			display: flex;
+			justify-content: center;
+			width: 80%;
+			margin: 40px auto;
+			div:first-child {
+				flex-grow: 0;
+			}
+			.contentbody {
+				width: 70%;
+				font-size: 2rem;
+				background: $travellerLightGray;
+				padding: 20px;
+				div {
+					margin: 10px;
+				}
+				div:nth-of-type(2) {
+					font-size: 1.4rem;
+				}
+				span {
+					font-weight: 500;
+					color: $traverllerOrange;
+				}
+			}
+			img {
+				width: 15%;
+				height: 15%;
+				margin-right: 20px;
+			}
+		}
+		.confirmbotton {
+			text-align: center;
+			button {
+				margin-bottom: 40px;
+				a {
+					color: white;
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

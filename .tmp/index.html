@@ -2,7 +2,9 @@
 <html ng-app="app">
 	<head>
 		<meta charset="UTF-8" />
-		<meta property="qc:admins" content="17134714776457761347263757" />
+		<meta property="qc:admins" content="17134714776765271442106375" />
+		<meta property="wb:webmaster" content="3a8e785a27a1fa66" />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 		<title>Traveller</title>
 
 	    <!-- build:css({.tmp,app}) styles/vendor.css -->
@@ -13,10 +15,9 @@
 	        <link rel="stylesheet" href="../bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css" />
 	        <link rel="stylesheet" href="../bower_components/lato/css/lato.css" />
 	        <link rel="stylesheet" href="../bower_components/Buttons/css/buttons.css" />
-	        <link rel="stylesheet" href="../bower_components/bootstrap-tour/build/css/bootstrap-tour.css" />
-	        <link rel="stylesheet" href="../bower_components/bootstrap-tour/build/css/bootstrap-tour-standalone.css" />
 	        <link rel="stylesheet" href="../bower_components/angular-toastr/dist/angular-toastr.css" />
 	        <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css" />
+	        <link rel="stylesheet" href="../bower_components/bootstrap-daterangepicker/daterangepicker.css" />
 	        <!-- endbower -->
 	    <!-- endbuild -->
 
@@ -38,12 +39,14 @@
 	    	<div ui-view></div>
 		</div>
 
-		<traveller-footer></traveller-footer>
+		<traveller-footer ng-if="showfooter"></traveller-footer>
+
+    	<script src="http://maps.google.cn/maps/api/js"></script>
 
     <!-- build:js(app) scripts/vendor.js -->
         <!-- bower:js -->
-        <script src="../bower_components/jquery/dist/jquery.js"></script>
         <script src="../bower_components/es5-shim/es5-shim.js"></script>
+        <script src="../bower_components/jquery/dist/jquery.js"></script>
         <script src="../bower_components/angular/angular.js"></script>
         <script src="../bower_components/json3/lib/json3.js"></script>
         <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -56,51 +59,80 @@
         <script src="../bower_components/semantic-ui/dist/semantic.js"></script>
         <script src="../bower_components/d3/d3.js"></script>
         <script src="../bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
-        <script src="../bower_components/jquery-bridget/jquery.bridget.js"></script>
+        <script src="../bower_components/jquery-bridget/jquery-bridget.js"></script>
         <script src="../bower_components/seiyria-bootstrap-slider/js/bootstrap-slider.js"></script>
         <script src="../bower_components/lodash/lodash.js"></script>
         <script src="../bower_components/lazy.js/lazy.js"></script>
         <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
         <script src="../bower_components/q/q.js"></script>
-        <script src="../bower_components/bootstrap-tour/build/js/bootstrap-tour.js"></script>
-        <script src="../bower_components/bootstrap-tour/build/js/bootstrap-tour-standalone.js"></script>
         <script src="../bower_components/angular-animate/angular-animate.js"></script>
-        <script src="../bower_components/ng-csv/build/ng-csv.min.js"></script>
         <script src="../bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
         <script src="../bower_components/angular-aria/angular-aria.js"></script>
         <script src="../bower_components/angular-material/angular-material.js"></script>
-        <script src="../bower_components/ngmap/build/scripts/ng-map.js"></script>
-        <script src="../bower_components/webcomponentsjs/webcomponents.js"></script>
+        <script src="../bower_components/moment/moment.js"></script>
+        <script src="../bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+        <script src="../bower_components/angular-daterangepicker/js/angular-daterangepicker.js"></script>
+        <script src="../bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"></script>
+        <script src="../bower_components/angular-stripe-checkout/angular-stripe-checkout.js"></script>
         <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/app.js -->
         <!-- inject:js -->
-        <script src="vendor/googlemaps.js"></script>
+        <script src="vendor/ng-map.min.js"></script>
         <!-- endinject -->
 
         <!-- inject:scripts -->
+        <script src="scripts/views/user/users.setting.module.js"></script>
+        <script src="scripts/views/user/info/info.controller.js"></script>
+        <script src="scripts/views/user/order/order.controller.js"></script>
+        <script src="scripts/views/user/booking/booking.controller.js"></script>
         <script src="scripts/views/main/main.controller.js"></script>
         <script src="scripts/views/user/userLogin.controller.js"></script>
         <script src="scripts/views/user/user.controller.js"></script>
         <script src="scripts/views/tour/tour.controller.js"></script>
+        <script src="scripts/views/review/review.controller.js"></script>
+        <script src="scripts/views/resetpwd/resetpwd.controller.js"></script>
+        <script src="scripts/views/guide/guide.controller.js"></script>
+        <script src="scripts/views/confirm/confirm.controller.js"></script>
+        <script src="scripts/shared/app.shared.module.js"></script>
+        <script src="scripts/shared/itinerary/itnerary.factory.js"></script>
+        <script src="scripts/shared/VisitCity/visitcity.factory.js"></script>
+        <script src="scripts/shared/SpotInfo/spotinfo.factory.js"></script>
+        <script src="scripts/shared/Quote/quote.factory.js"></script>
+        <script src="scripts/shared/Order/order.factory.js"></script>
+        <script src="scripts/shared/GuidePlanErrorInfo/guidePlanErrorInfo.factory.js"></script>
+        <script src="scripts/shared/GuideInfo/guideinfo.factory.js"></script>
+        <script src="scripts/shared/Edge/edge.factory.js"></script>
+        <script src="scripts/shared/CityInfo/cityinfo.factory.js"></script>
         <script src="scripts/directives/travellerHeader/travellerHeader.directive.js"></script>
+        <script src="scripts/directives/travellerSelectMulti/travellerSelectMulti.directive.js"></script>
+        <script src="scripts/directives/travellerSelectMulti/travellerSelectMulti.controller.js"></script>
         <script src="scripts/directives/travellerSelect/travellerSelect.directive.js"></script>
         <script src="scripts/directives/travellerSelect/travellerSelect.controller.js"></script>
         <script src="scripts/directives/travellerHeader/travellerHeader.controller.js"></script>
         <script src="scripts/directives/travellerFooter/travellerFooter.directive.js"></script>
         <script src="scripts/directives/travellerFooter/travellerFooter.controller.js"></script>
+        <script src="scripts/directives/tourCard/tourCard.directive.js"></script>
+        <script src="scripts/directives/tourCard/tourCard.controller.js"></script>
         <script src="scripts/directives/travellerBanner/travellerBanner.directive.js"></script>
         <script src="scripts/directives/travellerBanner/travellerBanner.controller.js"></script>
+        <script src="scripts/directives/modal/trustedsrc.filter.js"></script>
+        <script src="scripts/directives/modal/oauthModal.controller.js"></script>
         <script src="scripts/directives/modal/headerModal.controller.js"></script>
+        <script src="scripts/directives/modal/guideModal.controller.js"></script>
+        <script src="scripts/directives/popover/customPopover.directive.js"></script>
+        <script src="scripts/common/apiservice/apiService.factory.js"></script>
+        <script src="scripts/common/apiservice/apiInterceptor.factory.js"></script>
         <script src="scripts/common/user.factory.js"></script>
+        <script src="scripts/common/tourInfo.factory.js"></script>
         <script src="scripts/common/controller.factory.js"></script>
-        <script src="scripts/common/apiService.factory.js"></script>
-        <script src="scripts/common/apiInterceptor.service.js"></script>
+        <script src="scripts/common/accessToken.factory.js"></script>
         <script src="scripts/app.module.js"></script>
         <script src="scripts/accounts/mvUser.factory.js"></script>
         <script src="scripts/accounts/mvIdentity.factory.js"></script>
         <script src="scripts/accounts/mvAuth.factory.js"></script>
+        <script src="scripts/accounts/auth_events.factory.js"></script>
         <script src="scripts/views.module.js"></script>
         <script src="scripts/app.run.js"></script>
         <script src="scripts/app.config.js"></script>

@@ -1,0 +1,11 @@
+<div class="bookingpage">
+	<div class="bookingheader">
+		<div>我的订单</div>
+		<div ng-click="order()">预定行程</div>
+	</div>
+	<div class="bookingcontent">
+		<div class="tourcard" ng-repeat="order in orders">
+			<tour-card order="order" type="order"></tour-card>
+		</div>
+	</div>
+</div>

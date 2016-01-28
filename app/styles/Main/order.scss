@@ -1,0 +1,26 @@
+.user-order {
+	.order-detail {
+		margin-bottom: 40px;
+		width: 40%;
+		&>div {
+			margin: 5px 0;
+		}
+		.header {
+			display: flex;
+			justify-content: space-between;
+		}
+		.tourinfo {
+			display: flex;
+			div {
+				margin-right: 10px;
+			}
+		}
+		.footer {
+			display: flex;
+			justify-content: space-between;
+		}
+
+
+
+	}
+}

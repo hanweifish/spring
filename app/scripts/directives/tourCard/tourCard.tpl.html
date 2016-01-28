@@ -1,0 +1,29 @@
+<div class="tour-card">
+	<div class="card-header">
+		<img src="images/pic_proxy.jpg">
+	</div>
+	<div class="card-title">
+		<div>{{order.itinerary.start_city.cn_name}}游玩路线</div>
+		<div>$ {{order.cost_usd}}</div>
+	</div>
+	<div class="card-content">
+		<div class="tour-info">
+			<div ng-repeat="city in order.itinerary.city" >{{city.city.cn_name}}</div>
+		</div>
+		<div class="tour-time">
+			<div>{{order.itinerary.startdate}} - </div>
+			<div>{{order.itinerary.enddate}}</div>
+			<div>8天</div>
+		</div>
+		<div class="tag">未出发</div>
+	</div>
+	<div class="card-footer" ng-if="type === 'booking'">
+		<div ng-click="gotopay(order)">付款</div>
+		<div>查看行程</div>
+		<div>删除行程</div>
+	</div>
+	<div class="card-footer" ng-if="type === 'order'">
+		<div>查看行程</div>
+		<div>导出行程单</div>
+	</div>
+</div>

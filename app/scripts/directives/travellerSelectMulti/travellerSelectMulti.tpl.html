@@ -1,0 +1,22 @@
+<div class="form-select">
+	<div class="inputgroups">
+		<img ng-src="{{icon}}">
+		<div class="inputdiv">
+			<div class="cityshow" ng-repeat="city in selected_city">
+				<div>{{city.name}}</div>
+				<i class="fa fa-times" ng-click="removeSelectedCity(city)"></i>
+			</div>
+			<input class="controllerInput" placeholder="{{placeholder}}" ng-model="selected_city_name">
+		</div>
+		<span ng-click="show()">
+			<i class="fa fa-plus" ></i>
+		</span>
+		<span>
+			<i class="fa fa-question" custom-popover content="出发的第一个城市"> </i>
+		</span>
+	</div>
+
+	<div class="selectlayer" ng-if="showlayer">
+		<p ng-repeat="option in options_real | orderBy: 'name'" ng-click="addSelectCity(option)">{{option.name}}</p>
+	</div>
+</div>

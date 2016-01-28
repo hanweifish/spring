@@ -8,65 +8,49 @@ angular.module('app.controllers')
     '$scope',
     '$http',
     '$state',
+    'toastr',
+    'Controller',
+    'TourInfo',
+    'CitiInfo',
     BannerCtrl
 ]);
 
 
-function BannerCtrl($scope, $http, $state) {
+function BannerCtrl($scope, $http, $state, toastr, Controller, TourInfo, CitiInfo) {
+
+	$scope.options = {};
+
+	$http.get(Controller.base() + 'api/city').then(function(res){
+		$scope.options.city = _.map(res.data.city, function(city){
+			return {
+				name: city.cn_name,
+				value: city.city_id,
+				min: city.min,
+				alias: city.alias,
+				region: city.region
+			}
+		})
+		$scope.options.city_filtered = _.cloneDeep($scope.options.city);
+		TourInfo.city = $scope.options.city;
+	});
+
+
+	$scope.$watch('tourForm.start_city_id', function(val){
+		if (val) {
+			$scope.options.city_filtered = _.filter($scope.options.city, function(city){
+				return city.region === $scope.city_region;
+			})
+		}
+	})
+
+
+	$scope.datePicker = {
+		date: {startDate: null, endDate: null}
+	};
+
+
     $scope.tourShow = false;
 	$scope.tourForm = {};
-	$scope.options = {};
-	$scope.options.depart = [
-		{
-			name: '上海'
-		},
-		{
-			name: '北京'
-		},
-		{
-			name: '广州'
-		},
-		{
-			name: '成都'
-		},
-	];
-
-
-	$scope.options.des = [
-		{
-			name: '旧金山'
-		},
-		{
-			name: '纽约'
-		},
-		{
-			name: '洛杉矶'
-		},
-		{
-			name: '迈阿密'
-		},
-		{
-			name: '波士顿'
-		},
-	];
-
-	$scope.options.middle = [
-		{
-			name: '旧金山'
-		},
-		{
-			name: '纽约'
-		},
-		{
-			name: '洛杉矶'
-		},
-		{
-			name: '迈阿密'
-		},
-		{
-			name: '波士顿'
-		},
-	];
 
 	$scope.options.people = [
 		{
@@ -86,6 +70,10 @@ function BannerCtrl($scope, $http, $state) {
 		},
 	];
 
+
+
+
+
 	$scope.options.topic = [
 		{
 			name: '旅游'
@@ -95,23 +83,118 @@ function BannerCtrl($scope, $http, $state) {
 		}
 	];
 
-	$scope.options.cars = [
+	$scope.options.hotel = [
 		{
-			name: '三星'
+			name: '五星级',
+			value: '5'
 		},
 		{
-			name: '两星'
+			name: '四星级',
+			value: '4'
 		},
 		{
-			name: '一星'
+			name: '三星级',
+			value: '3'
+		},
+		{
+			name: '两星级',
+			value: '2'
+		},
+		{
+			name: '一星级',
+			value: '1'
 		}
 	];
 
-	$scope.tourForm.Depart = $scope.options.depart[0].name
 
     $scope.submitTour = function() {
-        $state.go('tour');
+
+    	$scope.tourForm.city = _.clone($scope.tourForm.city_plan) || [];
+
+		var start_obj = {"city": {"city_id":$scope.tourForm.start_city_id}};
+		var end_obj = {"city": {"city_id":$scope.tourForm.end_city_id}};
+		var start_index = _($scope.tourForm.city_plan).map(function(city) {
+			return city.city.city_id === $scope.tourForm.start_city_id;
+		}).compact().value();
+		var end_index = _($scope.tourForm.city_plan).map(function(city) {
+			return city.city.city_id === $scope.tourForm.end_city_id;
+		}).compact().value();
+
+    	if ($scope.tourForm.start_city_id && start_index.length === 0) {
+			$scope.tourForm.city.unshift(start_obj);
+    	}
+    	if ($scope.tourForm.end_city_id && end_index.length === 0) {
+			$scope.tourForm.city.push(end_obj);
+    	}
+
+
+    	$scope.tourForm.keep_order_of_via_cities = false;
+
+    	if ($scope.datePicker.date.startDate && $scope.datePicker.date.endDate) {
+	    	$scope.tourForm.startdate = parseInt($scope.datePicker.date.startDate.format('YYYYMMDD'));
+	    	$scope.tourForm.enddate = parseInt($scope.datePicker.date.endDate.format('YYYYMMDD'));
+	    	$scope.tourForm.date = $scope.datePicker.date;
+    	}
+
+
+    	$scope.tourForm.num_people = parseInt($scope.tourForm.num_people);
+    	$scope.tourForm.num_room = parseInt($scope.tourForm.num_room);
+    	$scope.tourForm.hotel = parseInt($scope.tourForm.hotel);
+    	$scope.tourForm.one_guide_for_whole_trip = 'BOTH';
+    	$scope.tourForm.start_city = start_obj.city;
+		$scope.tourForm.end_city = end_obj.city;
+
+  //   	$scope.tourForm = {
+		// 	"start_city_id": 1,
+		// 	"city": [{
+		// 		"city": {
+		// 			"city_id": 1
+		// 		}
+		// 	}, {
+		// 		"city": {
+		// 			"city_id": 8
+		// 		}
+		// 	}, {
+		// 		"city": {
+		// 			"city_id": 2
+		// 		}
+		// 	}],
+		// 	"end_city_id": 2,
+		// 	"keep_order_of_via_cities": false,
+		// 	"startdate": 20160116,
+		// 	"enddate": 20160122,
+		// 	"date": $scope.datePicker.date,
+		// 	"num_people": 3,
+		// 	"num_room": 3,
+		// 	"hotel": 3,
+		// 	"one_guide_for_whole_trip": "BOTH",
+		// 	"start_city": {
+		// 		"city_id": 1
+		// 	},
+		// 	"end_city": {
+		// 		"city_id": 2
+		// 	}
+		// }
+
+		$http.post(Controller.base() + 'api/plan', {'itinerary': $scope.tourForm}).then(function(res){
+			$scope.tourForm.city = [];
+			if (res.data && res.data.status === 'SUCCESS') {
+				toastr.success('订制成功!');
+				TourInfo.itinerary = res.data.itinerary;
+				TourInfo.requestData = {'itinerary': $scope.tourForm}
+				$state.go('tour');
+			} else {
+				toastr.error('订制失败，请重新尝试');
+			}
+		})
+
     }
+
+    $scope.$watchCollection('datePicker', function(val){
+	    if (val && val.date && val.date.startDate && val.date.endDate) {
+				$scope.dateDiff = val.date.endDate.diff(val.date.startDate, 'days') + 1;
+	    	}
+    })
 
     //For Date Picker
 	$scope.myDate = new Date();
@@ -127,8 +210,8 @@ function BannerCtrl($scope, $http, $state) {
 	  $scope.myDate.getDate());
 
 	$scope.onlyWeekendsPredicate = function(date) {
-	var day = date.getDay();
-	return day === 0 || day === 6;
+		var day = date.getDay();
+		return day === 0 || day === 6;
 	}
 
 }

@@ -1,0 +1,31 @@
+<div class="user_info">
+	<div class="infoheader">
+		<div>我的账户</div>
+	</div>
+	<div class="infocontent">
+		<div class="item">
+			<div>用户名:</div>
+			<div>{{user_info.user_name}}</div>
+		</div>
+		<div class="item">
+			<div>邮箱:</div>
+			<div>{{user_info.email}}</div>
+		</div>
+		<div class="button" ng-if="!resetPwd"><span ng-click="reset()" >重设密码</span></div>
+		<div ng-if="resetPwd" class="resetpwd">
+			<div class="item">
+				<div>旧密码:</div>
+				<input type="password" ng-model="option.current_password" required>
+			</div>
+			<div class="item">
+				<div>新密码:</div>
+				<input type="password" ng-model="option.new_password" required>
+			</div>
+			<div class="item">
+				<div>重复新密码:</div>
+				<input type="password" ng-model="option.new_password_again" required>
+			</div>
+			<div class="button" ng-click="submit()">提交</div>
+		</div>
+	</div>
+</div>
