@@ -1,9 +1,9 @@
 {
-  "name": "Techbow",
-  "version": "0.0.0",
+  "name": "Trip",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "engines": {
     "node": "0.10.x",
@@ -46,9 +46,7 @@
     "run-sequence": "^1.1.2",
     "wiredep": "^2.2.2"
   },
-  "scripts": {
-    "start": "NODE_ENV=production nodemon server.js"
-  },
+
   "main": "./dist/index.html",
   "dependencies": {
     "body-parser": "^1.13.3",
