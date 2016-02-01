@@ -45,6 +45,27 @@ function DashboardConfig ($stateProvider) {
         controller: 'ConfirmCtrl'
     });
 
+
+    $stateProvider.state('guideinfo', {
+        url: '/guideinfo',
+        templateUrl: 'scripts/views/guideinfo/guideinfo.tpl.html',
+        controller: 'GuideInfoCtrl',
+        resolve: {
+            Cities: function($http, Controller){
+                    return $http.get(Controller.base() + 'api/cities').then(function(res){
+                        var cities = _.map(res.data, function(city){
+                            return {
+                                label: city.cn_name,
+                                id: city._id,
+                            }
+                        })
+                    return cities;
+                });
+            }
+        }
+    });
+
+
     $stateProvider.state('accessToken', {
         url: '/access_token=:accessToken',
         templateUrl: 'scripts/directives/modal/oauthModal.tpl.html',
@@ -56,6 +77,7 @@ function DashboardConfig ($stateProvider) {
         templateUrl: 'scripts/views/resetpwd/resetpwd.tpl.html',
         controller: 'ResetPwdCtrl'
     });
+
 }
 
 }());

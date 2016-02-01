@@ -20,6 +20,7 @@ angular.module('app', [
     'ngMap',
     'dndLists',
     'daterangepicker',
+    'angularjs-dropdown-multiselect',
 ]);
 
 

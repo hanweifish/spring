@@ -18,9 +18,10 @@ function ControllerFactory($resource, $http) {
         // Defines the url associated with the controller
         this.persistentData = {
             scheme: 'http',
-            host: '106.184.1.83',
-            // host:'54.213.193.97',
-            port: '8080',
+            host: 'localhost',
+            // host: '106.184.1.83', //xiaofeng
+            // host:'54.213.193.97', //yipeng
+            port: '3004',
             prefix: '',
             version: 'v1.0'
         };

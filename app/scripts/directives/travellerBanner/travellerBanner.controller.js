@@ -20,8 +20,8 @@ function BannerCtrl($scope, $http, $state, toastr, Controller, TourInfo, CitiInf
 
 	$scope.options = {};
 
-	$http.get(Controller.base() + 'api/city').then(function(res){
-		$scope.options.city = _.map(res.data.city, function(city){
+	$http.get(Controller.base() + 'api/cities').then(function(res){
+		$scope.options.city = _.map(res.data, function(city){
 			return {
 				name: city.cn_name,
 				value: city.city_id,

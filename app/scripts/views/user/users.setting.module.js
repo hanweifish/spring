@@ -15,14 +15,13 @@ function viewsUserConfig($stateProvider) {
         controller: 'UserCtrl',
         resolve: {
             UserData:  function($http, Controller, $cookieStore, User) {
-               return $http.post(Controller.base() + 'api/userinfo', {
-                        'user_token': $cookieStore.get('token')
-                     }).then (function (res) {
-                            User.user_info = res.data.user_info;
-                            User.order = res.data.order;
+               return $http.get(Controller.base() + 'api/user_info')
+                        .then (function (res) {
+                            console.log(res);
+                            // User.order = res.data.order;
                             return res.data;
-                    })
-            }
+                        })
+                }
         },
 
     });

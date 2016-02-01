@@ -4,10 +4,11 @@
 angular.module('app.shared')
     .service('ApiInterceptor', [
         '$rootScope',
+        'AUTH_EVENTS',
         ApiInterceptorFactory
     ]);
 
-function ApiInterceptorFactory($rootScope) {
+function ApiInterceptorFactory($rootScope, AUTH_EVENTS) {
     var service = this;
 
     service.request = function(config) {
@@ -31,30 +32,24 @@ function ApiInterceptorFactory($rootScope) {
     service.responseError = function(response) {
         var rejection;
 
-        // switch(response.status) {
-        //     case 401: {
-        //         // if the error is to a definition call and user is not an admin let it slide
-        //         // so it doesn't go to the catch block in the promise chain
-        //         if (/(definition)/i.test(response.config.url)) {
-        //             if (!Token.token.isAdmin) return response;
-        //         }
+        switch(response.status) {
+            case 401: {
+                // if the error is to a definition call and user is not an admin let it slide
+                // so it doesn't go to the catch block in the promise chain
 
-        //         $rootScope.$broadcast('unauthorized');
-        //         response.data = {};
-        //         response.data.message = 'Invalid Login';
-        //         rejection = response;
-        //         break;
-        //     }
+                $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+                rejection = response;
+                break;
+            }
 
-        //     case 400: {
-        //         if (!response) {
-        //             response.data = {};
-        //             response.data.message = 'Invalid Config';
-        //         }
-        //             rejection = response;
-        //             ErrorHandling.errorMessage = response;
-        //         break;
-        //     }
+            case 400: {
+                if (!response) {
+                    response.data = {};
+                    response.data.message = 'Invalid Config';
+                }
+                    rejection = response;
+                break;
+            }
 
         //     case 404: {
 
@@ -78,7 +73,7 @@ function ApiInterceptorFactory($rootScope) {
         //         rejection = response;
         //         break;
         //     }
-        // }
+        }
 
         return Q.reject(rejection);
     };

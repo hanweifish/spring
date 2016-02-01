@@ -1,0 +1,44 @@
+@import 'variables';
+
+
+.guideform {
+	margin: 0 auto;
+	font-size: 2rem;
+
+	.item {
+		font-size: 1.7rem;
+		width: 50%;
+		margin: 20px auto;
+		display: flex;
+		div {
+			flex: 1;
+		}
+	}
+	.title {
+		text-align: center;
+		margin: 40px;
+		color: $traverllerOrange;
+		font-weight: 500;
+	}
+	.itembutton {
+		text-align: center;
+		.submit {
+			margin: 30px auto;
+			padding: 10px 40px;
+			background: $traverllerOrange;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			font-weight: 500;		
+		}
+	}
+	select {
+	    font-weight: 400;
+	    cursor: pointer;
+	    width: 30%;
+	}
+	input {
+		padding: 5px;
+		font-size: 1.6rem;
+	}
+}

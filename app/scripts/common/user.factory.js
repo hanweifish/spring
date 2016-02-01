@@ -55,25 +55,23 @@ function UserFactory($rootScope, $resource, $state, $cookies, $cookieStore, Cont
     User.prototype.signup = function(auth) {
         var that = this;
         var deferred = Q.defer();
-        return $resource(Controller.base() + 'api/signup')
+        $resource(Controller.base() + 'signup')
             .save(auth).$promise
             .then(function(res) {
-                 if (res.status === 'SUCCESS') {
-                    $cookieStore.put('username', res.user_info.user_name || res.user_info.nick_name);
-                    $cookieStore.put('userimage', res.user_info.picture_url);
-                    $cookieStore.put('token', res.token);
-                    $cookieStore.put('isLoggin', true);
-                    that.persistentData.token = res.token;
-                    that.persistentData.loggedIn = true;
-                    that.persistentData.username = res.user_info.user_name || res.user_info.nick_name;
-                    that.persistentData.user_info = res.user_info;
-                    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                    deferred.resolve(res);
-                } else {
-                    deferred.reject(res);
-                }
-                return deferred.promise;
-        });
+                $cookieStore.put('username', res.username);
+                // // $cookieStore.put('userimage', res.user_info.picture_url);
+                $cookieStore.put('isLoggin', true);
+                // that.persistentData.token = res.token;
+                that.persistentData.loggedIn = true;
+                that.persistentData.username = res.user_name;
+                that.persistentData.user_info = res.user_info;
+                $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                deferred.resolve(res);          
+            })
+            .catch(function(err){
+                deferred.reject(err);
+            });
+        return deferred.promise;
     };
 
     /**
@@ -88,29 +86,24 @@ function UserFactory($rootScope, $resource, $state, $cookies, $cookieStore, Cont
     User.prototype.login = function(auth) {
         var that = this;
         var deferred = Q.defer();
-        return $resource(Controller.base() + 'api/login')
+        
+        $resource(Controller.base() + 'login')
             .save(auth).$promise
             .then(function(res) {
-                 if (res.status === 'SUCCESS') {
-                    $cookieStore.put('username', auth.username);
-                    $cookieStore.put('token', res.token);
-                    $cookieStore.put('isLoggin', true);
-                    that.persistentData.token = res.token;
-                    that.persistentData.loggedIn = true;
-                    that.persistentData.username = auth.username;
-                    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                    deferred.resolve(res);
-                } else {
-                    deferred.reject(res);
-                }
-                return deferred.promise;
-                // Token.token = this.persistentData.token;
-
-                // // reset expire timer to new expire time
-                // clearTimeout(this.expireTimer);
-                // var timeout = this.persistentData.token.expires - Date.now();
-                // this.expireTimer = timer(timeout, this.logout.bind(this));
-            });
+                console.log(res);
+                //  $cookieStore.put('username', res.username);
+                // // // $cookieStore.put('token', res.token);
+                // $cookieStore.put('isLoggin', true);
+                that.persistentData.token = res.token;
+                that.persistentData.loggedIn = true;
+                that.persistentData.username = auth.username;
+                $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                deferred.resolve(res);                   
+            }, function(err){
+                deferred.reject(err);
+            })
+                
+        return deferred.promise;
     };
 
 

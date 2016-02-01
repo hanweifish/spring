@@ -38,7 +38,7 @@ function HeaderModalCtrl($scope, $modal, $modalInstance, $http, $cookies, $windo
         $scope.$parent.updateHeader();
         toastr.success('注册并且登陆成功!');
       }, function(err){
-        toastr.error(err.status);
+        toastr.error(err.data.message);
       })
 	}
 
@@ -50,7 +50,7 @@ function HeaderModalCtrl($scope, $modal, $modalInstance, $http, $cookies, $windo
         $scope.$parent.updateHeader();
         toastr.success('登陆成功!');
     }, function(err){
-       toastr.error(err.status);
+       toastr.error(err);
     })
   }
 

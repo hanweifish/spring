@@ -1,0 +1,82 @@
+<div class="guideform">
+	<form ng-submit="submit()">
+	<div class="title">导游信息收集</div>
+
+	<div class="item">
+		<div class="itemcaptical">姓名</div>
+		<div>
+			<input ng-model="guideform.name" required>
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="itemcaptical">描述</div>
+		<div>
+			<textarea ng-model="guideform.description"></textarea>
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="itemcaptical">标签 (举例：浪漫 商务 家庭)</div>
+		<div>
+			<input ng-model="guideform.tag" required>
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="itemcaptical">最多接待人数</div>
+		<div>
+			<input type=number ng-model="guideform.max_person" required>
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="itemcaptical">是否有车</div>
+		<div>
+			<select
+				ng-model="guideform.has_car"
+				ng-options="option.value as option.name for option in options.has_car"
+				ng-init="guideform.has_car = options.has_car[0].value">
+			</select>
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="itemcaptical">电话号码</div>
+		<div>
+			<input  ng-model="guideform.phone" required>
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="itemcaptical">覆盖城市(多选)</div>
+		<div ng-dropdown-multiselect="" options="options.city" selected-model="guideform.cover_city" extra-settings="settings"></div>
+	</div>
+
+	<div class="item">
+		<div class="itemcaptical">语言 (举例: 英语|汉语)</div>
+		<div>
+			<input  ng-model="guideform.language" ng-init="guideform.language='英语|汉语'" required>
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="itemcaptical">支付方式</div>
+		<div>
+			<input  ng-model="guideform.payment">
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="itemcaptical">上传图片</div>
+		<div>
+			<input type=file  ng-model="guideform.image_url">
+		</div>
+	</div>
+
+	<div class="itembutton">
+		<input type="submit" value="提交" class="submit">
+	</div>
+	</form>
+
+</div>
