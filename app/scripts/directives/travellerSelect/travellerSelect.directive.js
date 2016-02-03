@@ -86,7 +86,7 @@ function linkFunc($timeout, scope, elem, attrs) {
 
     scope.selectCity = function(option){
         scope.selected_city_name = option.name;
-        scope.selected = option.value;
+        scope.selected = option.id;
         scope.showlayer = false;
         scope.region = option.region;
     }

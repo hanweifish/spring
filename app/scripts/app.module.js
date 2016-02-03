@@ -21,6 +21,8 @@ angular.module('app', [
     'dndLists',
     'daterangepicker',
     'angularjs-dropdown-multiselect',
+    'ngFileUpload',
+    'ngImgCrop',
 ]);
 
 

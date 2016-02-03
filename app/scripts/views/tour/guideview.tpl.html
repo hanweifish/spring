@@ -1,15 +1,14 @@
 <div class="tour">
 	<div class="tour-content">
 		<div class="dateshow">
-			<div>出行时间：{{itinerary.start_date | date: 'shortDate'}} <i class="fa fa-long-arrow-right"></i> {{itinerary.end_date | date: 'shortDate'}}, 共 {{diffDate}} 天</div>
+			<div>出行时间：{{Itinerary.start_date | date: 'shortDate'}} <i class="fa fa-long-arrow-right"></i> {{Itinerary.end_date | date: 'shortDate'}}, 共 {{diffDate}} 天</div>
 			<div>目前已规划时间: <span>{{getDays()}}</span> 天</div>
 		</div>
 		<div class="tour-content-body" dnd-list="tours">
 
-			<div class="breaksection"><i class="fa fa-plane"></i> 抵达{{tours[0].city.name}}，专业导游接机</div>
-
 			<div class="tour-content-section" ng-repeat = "tour in tours" dnd-draggable="tour" dnd-moved="tours.splice($index, 1)"
-        	dnd-effect-allowed="move" dnd-selected="tours.selected = tour">
+        	dnd-effect-allowed="move" dnd-selected="tours.selected = tour" ng-class="{'selected': tours.selected === item}"
+			>
 				<div class="head">
 					<div class="head-left">
 						<img src="images/tour/tour-icon.png">
@@ -21,96 +20,37 @@
 						</div>
 					</div>
 				</div>
-				<div class="section" ng-repeat="spots in tour.spots.plan">
+				<div class="section" ng-repeat="plan in tour.plans">
 					<div class="section-left">
-						<div>D{{$index}}</div>
+						<div class="circle"></div>
 					</div>
 
-					<div class="section-right" ng-click="showSpots(spots, tour.spots.unused_spots)">
-						<div class="section-right-title">
-							<div class="sectondetail">
-								<div>
-									<i class="fa fa-map-marker"></i>
-								</div>
-								<div>
-									<span ng-repeat="spot in spots" class="spotname">{{spot.name}}</span>
-								</div>
-							</div>
-							<div class="sectondetail">
-								<div>
-									<i class="fa fa-bed"></i>
-								</div>
-								<div>
-									<span class="spotname">希尔顿或同级酒店({{itinerary.hotel}}星级)</span>
-								</div>
+					<div class="section-right">
+						<div class="section-right-title" ng-click="toggleContent(plan)">
+							<div>第 {{plan.day_id}} 天</div>
+							<i class="fa fa-caret-down"></i>
+						</div>
+						<div class="section-right-content" ng-if="plan.contentStatus">
+							<div ng-repeat="spot in plan.spot">
+								<div>{{spot.info.name}}</div>
+								<div>{{spot.hours}} Hours</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			
-			<div class="breaksection"><i class="fa fa-plane"></i> 离开出境地: {{tours[tours.length-1].city.name}}</div>
+		</div>
 
-			<div class="tour-content-header">
-				推荐城市： <span ng-repeat="city in sugguest_cities"> {{city.name}}-</span>
-	<!-- 			<div>
-					<traveller-select options="TourInfo.city" selected="start_city_id" placeholder="添加城市" icon="images/icon5.png" key="city_id"></traveller-select>
-				</div>
-				<div>
-					<button class="btn" ng-click="addPlan()">添加</button>
-				</div> -->
+		<div class="tour-content-header">
+			<div>
+				<traveller-select options="TourInfo.city" selected="start_city_id" placeholder="添加城市" icon="images/icon5.png" key="city_id"></traveller-select>
 			</div>
-
-		</div>
-
-
-
-	</div>
-
-
-	<div class="guide-content" ng-if="showSpotsStatus" style="background: #F7F6F2"> 
-		<div class="guide-content-header">
-			<i class="fa fa-chevron-left"></i>查看当日景点
-		</div>
-		<div style="overflow: auto" dnd-list="selectedSpots">
-			<div ng-repeat="spot in selectedSpots" class="spotcard" dnd-draggable="spot" dnd-moved="selectedSpots.splice($index, 1)"
-        	dnd-effect-allowed="move" dnd-selected="selectedSpots.selected = spot">
-				<div class="spotheader">
-					{{spot.name}} <i class="fa fa-trash-o" ng-click="deleteSpot(spot)"></i>
-				</div>
-				<div class="cardimage">
-					<img src="images/spotimage.jpg">
-				</div>
-				<div class="spotcontent">
-					在洛杉矶西部，UCLA附近是绵延的圣塔莫妮卡山脉，山崖高处伫立著一群奇特的建筑，这就是著名的盖蒂中心（Getty Center）。
-				</div>
+			<div>
+				<button class="btn" ng-click="addPlan()">添加</button>
 			</div>
 		</div>
-		<div class="guide-content-footer" ng-click="getQuote()" ng-if="!showQuoteView">
-			<div class="content" ng-click="chooseGuide()">选择导游</div>
-		</div>
+
 	</div>
-
-	<div class="guide-content" ng-if="showSpotsStatus" style="background: #F7F6F2">
-		<div class="guide-content-header">
-			<i class="fa fa-chevron-left"></i>值得去的景点或增值内容
-		</div>
-		<div style="overflow: auto">
-			<div ng-repeat="spot in unused_spots" class="spotcard">
-				<div class="spotheader">
-					{{spot.name}} <i class="fa fa-plus" ng-click="addSpot(spot)"></i>
-				</div>
-				<div class="cardimage">
-					<img src="images/spotimage.jpg">
-				</div>
-				<div class="spotcontent">
-					在洛杉矶西部，UCLA附近是绵延的圣塔莫妮卡山脉，山崖高处伫立著一群奇特的建筑，这就是著名的盖蒂中心（Getty Center）。
-				</div>
-			</div>
-		</div>
-	</div>
-
-
 
 	<div class="guide-content" ng-if="showGuide">
 		<div class="guide-content-header">
@@ -321,7 +261,7 @@
 	</div>
 
 
-<!-- 	<div class="tour-map" ng-if="showMap"> -->
+	<div class="tour-map" ng-if="showMap">
 <!-- 		<ng-map zoom="8" center="{{tours[0].city.name}}" style="height: 100%" zoom-to-include-markers="true">
 			<custom-marker ng-repeat="tour in tours"
 			  position="{{tour.city.name}}">
@@ -338,6 +278,6 @@
 		      stroke-weight="2">
         	</directions>
 		</ng-map> -->
-<!-- 	</div> -->
+	</div>
 
 </div>

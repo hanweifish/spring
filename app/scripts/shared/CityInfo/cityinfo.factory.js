@@ -23,17 +23,23 @@ function CitiInfoFactory($http, Controller) {
 
     CitiInfo.prototype.getList = function(){
         var that = this;
-        $http.get(Controller.base() + 'api/city').then(function(res){
-            // $scope.options.city = _.map(res.data.city, function(city){
-            //     return {
-            //         name: city.cn_name,
-            //         value: city.city_id,
-            //         min: city.min,
-            //         alias: city.alias
-            //     }
-            // })
-            that.children = res.data.city;
+        return $http.get(Controller.base() + 'api/cities').then(function(res){
+            that.children = _.map(res.data, function(city){
+                return {
+                    name: city.cn_name,
+                    id: city._id,
+                    min: city.min_day,
+                    max: city.max_day,
+                    alias: city.alias
+                }
+            })
         });
+    }
+
+    CitiInfo.prototype.getCitybyId = function(id) {
+        return _.filter(this.children, function(child){
+            return child.id === id;
+        })[0];
     }
 
     return new CitiInfo();

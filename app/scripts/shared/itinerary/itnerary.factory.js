@@ -2,20 +2,18 @@
 'use strict';
 
 angular.module('app.shared')
-    .factory('Itnerary', [
+    .factory('Itinerary', [
         '$http',
-        'VisitCity',
-        'Edge',
-        'GuideInfo',
-        'Quote',
-        'Order',
-        ItneraryFactory
+        '$q',
+        'CitiInfo',
+        'Controller',
+        ItineraryFactory
     ]);
 
 
-function ItneraryFactory($http, VisitCity, Edge, GuideInfo, Quote, Order) {
+function ItineraryFactory($http, $q, CitiInfo, Controller) {
 
-    function Itnerary(opt) {
+    function Itinerary(opt) {
         // this.user_token = '';
         // this.startdate = '';
 
@@ -37,7 +35,63 @@ function ItneraryFactory($http, VisitCity, Edge, GuideInfo, Quote, Order) {
 
 
 
-    return new Itnerary();
+    Itinerary.prototype.getSpots = function(){
+        var that = this;
+        var deferred = $q.defer();
+        var promise = [];
+         _.each(this.children.city_plan, function(city){
+            promise.push(            
+                that.getSpot(city.id, city.allocate_days, that.children.selected_tag)
+                    .then(function(res){
+                        city.spots = res.data;        
+                })
+            )
+        })
+
+        $q.all(promise).then(function(){
+            deferred.resolve();
+        })
+        return deferred.promise;
+    }
+
+
+    Itinerary.prototype.getSpot = function(id, days, selected_tag){
+        return $http.post(Controller.base() + 'api/spots', {
+            'city_id': id,
+            'total_days': days,
+            'selected_tag': selected_tag
+        })
+    };
+
+
+    Itinerary.prototype.updateSpots = function(tour, id, num_days){
+
+    };
+
+
+    Itinerary.prototype.getCityInfo = function(){
+        var deferred = $q.defer();
+        _.each(this.children.city_plan, function(plan){
+            plan.city = CitiInfo.getCitybyId(plan.id);
+            deferred.resolve();
+        })
+        return deferred.promise;
+    };
+
+     Itinerary.prototype.getSpotIndex = function(){
+        var deferred = $q.defer();
+        _.each(this.children.city_plan, function(plan){
+            _.each(plan.spots.plan, function(spot){
+                console.log(spot);
+            })
+            deferred.resolve();
+        })
+        return deferred.promise;
+    };
+
+
+    return new Itinerary();
+
 }
 
 }());

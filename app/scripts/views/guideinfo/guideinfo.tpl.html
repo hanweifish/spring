@@ -1,5 +1,5 @@
 <div class="guideform">
-	<form ng-submit="submit()">
+	<form ng-submit="submit()" method="post" enctype="multipart/form-data">
 	<div class="title">导游信息收集</div>
 
 	<div class="item">
@@ -68,15 +68,38 @@
 	</div>
 
 	<div class="item">
-		<div class="itemcaptical">上传图片</div>
-		<div>
-			<input type=file  ng-model="guideform.image_url">
+		<div class="itemcaptical">上传头像图片</div>
+		<div class="uploadimage">
+			<button ngf-select ng-model="picFile" accept="image/*">选择图片</button>
+        	<div ngf-drop ng-model="picFile" ngf-pattern="image/*" class="cropArea" ng-show="picFile">
+            	<img-crop image="picFile  | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''"></img-crop>
+        	</div>
+        	<div ng-show="picFile"><img ng-src="{{croppedDataUrl}}"></div>
+        	<div ng-show="picFile"><button ng-click="upload(croppedDataUrl)">提交图片</button></div>
 		</div>
 	</div>
+
+	<div class="item">
+		<div class="itemcaptical">上传特色图片(多图)</div>
+			<div class="uploadimage">
+				<button ngf-select="uploadFiles($files, $invalidFiles)" multiple accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+				选择图片并上传</button>
+				<div>已上传图片:</div>
+				<div>
+					<ul>
+						<li ng-repeat="f in files" style="font:smaller">{{f.name}} {{f.$errorParam}}</li>
+					    <li ng-repeat="f in errFiles" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}</li> 
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 	<div class="itembutton">
 		<input type="submit" value="提交" class="submit">
 	</div>
+	
 	</form>
 
 </div>
