@@ -94,6 +94,7 @@ function TourCtrl($scope, $http, $modal, $state, $rootScope, Controller, Itinera
 	$scope.deleteSpot = function(spot) {
 		var index = $scope.selectedSpots.indexOf(spot);
 		$scope.selectedSpots.splice(index, 1);
+		$scope.unused_spots.push(spot);
 	}
 
 	$scope.addSpot = function(spot) {
@@ -103,42 +104,49 @@ function TourCtrl($scope, $http, $modal, $state, $rootScope, Controller, Itinera
 	}
 
 
-	$scope.addPlan = function() {
-		TourInfo.requestData.itinerary.city = _.clone($scope.tours);
+	$scope.addCity = function(city) {
 
-		var newCity = {
-			"city": {
-				"city_id": $scope.start_city_id
-			}
-		}
-        var index = _.findIndex(TourInfo.requestData.itinerary.city, function(city) {
-            return city.city.city_id === $scope.start_city_id;
-        })
-
-		if ($scope.start_city_id && index === -1) {
-			TourInfo.requestData.itinerary.city.push(newCity);
-			$http.post(Controller.base() + 'api/plan', TourInfo.requestData).then(function(res){
-				if (res.data && res.data.status === 'SUCCESS') {
-					TourInfo.itinerary = res.data.itinerary;
-					$scope.tours = TourInfo.itinerary.city;
-					getTours();
-				} else {
-					toastr.error('无法添加此城市，请选择其他城市');
-					TourInfo.requestData.city = _.clone($scope.tours);
-				}
-				delete $scope.start_city_id;
-			})
-
-		} else {
-			toastr.error('城市已经存在');
-		}
-
-
+		var obj = {};
+		obj.city = _.map($scope.tours, function(city){
+			return city.id;
+		})
+		obj.city.splice(1, 0, city.id);
+		updatePlan(obj);
 	}
+
+	function updatePlan(obj){
+		console.log(obj);
+		obj = _.extend(obj, $scope.itinerary);
+		delete obj.status;
+		$http.post(Controller.base() + 'api/plan', obj).then(function(res){
+			toastr.success('添加城市成功!');
+			console.log(res);
+			Itinerary.children = res.data;
+			Itinerary.getCityInfo()
+				.then(Itinerary.getSpots())
+				.then(function(){
+					console.log( Itinerary.children.city_plan);
+					$scope.tours = Itinerary.children.city_plan;
+					$scope.sugguest_cities = _.map(Itinerary.children.sugguest_cities, function(id){
+						return CitiInfo.getCitybyId(id);
+					});
+				})
+		})
+		.catch(function(err){
+			console.log(err);
+			toastr.error('无法添加此城市，请选择其他城市');
+		})
+	}
+
 
 	$scope.deletePlan = function(tour) {
 		var index = $scope.tours.indexOf(tour);
 		$scope.tours.splice(index, 1);
+		var obj = {};
+		obj.city = _.map($scope.tours, function(city){
+			return city.id;
+		})
+		updatePlan(obj);
 	}
 
 	$scope.chooseGuide = function(){

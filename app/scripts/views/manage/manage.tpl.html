@@ -1,0 +1,19 @@
+<div class="user_info_page">
+    <div class="user_info_maue">
+        <div class="user-icon">
+        	<img src="images/header.png">
+<!--         	<div>{{User.user_info.user_name}}</div> -->
+        </div>
+        <div class="user-right">
+            <div><a ui-sref="manage.users" ui-sref-active="active">用户管理</a></div>
+            <div><a ui-sref="manage.orders" ui-sref-active="active">订单管理</a></div>
+            <div><a ui-sref="manage.cities" ui-sref-active="active">城市管理</a></div>
+            <div><a ui-sref="manage.spots" ui-sref-active="active">景点管理</a></div>
+            <div><a ui-sref="manage.guides" ui-sref-active="active">导游管理</a></div>
+        </div>
+    </div>
+
+    <div class="user_info_content" ui-view></div>
+
+</div>
+

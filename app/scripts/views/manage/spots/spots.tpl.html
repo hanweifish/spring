@@ -1,0 +1,22 @@
+<div class="managepage">
+	<div class="managesection">
+		<div>景点</div>
+		<div>游玩时间</div>
+		<div>所属城市</div>
+		<div>分数</div>
+		<div>标签</div>
+		<div>描述</div>
+		<div>景点图片</div>
+		<div><span>修改</span>|<span>删除</span></div>
+	</div>
+	<div ng-repeat="spot in spots" class="managesection">
+		<div>{{spot.name}}</div>
+		<div>{{spot.hour}}</div>
+		<div></div>		
+		<div>{{spot.score}}</div>
+		<div>{{spot.tag}}</div>
+		<div>{{spot.discription}}</div>
+		<div>{{spot.image_url}}</div>
+		<div><span>修改</span>|<span>删除</span></div>
+	</div>
+</div>

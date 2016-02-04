@@ -1,0 +1,26 @@
+<div class="managepage">
+	<div class="managesection">
+		<div>姓名</div>
+		<div>标签</div>
+		<div>覆盖城市</div>
+		<div>分数</div>
+		<div>是否有车</div>
+		<div>语言</div>
+		<div>接待人数</div>
+		<div>电话</div>
+		<div>头像</div>
+		<div><span>修改</span>|<span>删除</span></div>
+	</div>
+	<div ng-repeat="guide in guides" class="managesection">
+		<div>{{guide.name}}</div>
+		<div>{{guide.tag}}</div>
+		<div></div>		
+		<div>{{guide.score}}</div>
+		<div>{{guide.has_car}}</div>
+		<div>{{guide.language}}</div>
+		<div>{{guide.max_person}}</div>
+		<div>{{guide.phone}}</div>
+		<div>{{guide.image_url}}</div>
+		<div><span>修改</span>|<span>删除</span></div>
+	</div>
+</div>

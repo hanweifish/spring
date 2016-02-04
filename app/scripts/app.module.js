@@ -10,6 +10,7 @@ angular.module('app', [
     'app.controllers',
     'app.filters',
     'views.users',
+    'views.manage',
     'ui.router',
     'ui.bootstrap',
     'ngResource',

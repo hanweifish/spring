@@ -52,7 +52,7 @@
 			<div class="breaksection"><i class="fa fa-plane"></i> 离开出境地: {{tours[tours.length-1].city.name}}</div>
 
 			<div class="tour-content-header">
-				推荐城市： <span ng-repeat="city in sugguest_cities"> {{city.name}}-</span>
+				推荐城市： <span ng-repeat="city in sugguest_cities" ng-click="addCity(city)" style="cursor: pointer"> {{city.name}}-</span>
 	<!-- 			<div>
 					<traveller-select options="TourInfo.city" selected="start_city_id" placeholder="添加城市" icon="images/icon5.png" key="city_id"></traveller-select>
 				</div>

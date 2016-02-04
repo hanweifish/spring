@@ -1,0 +1,22 @@
+<div class="managepage">
+	<div class="managesection">
+		<div>城市中文名</div>
+		<div>城市英文名</div>
+		<div>max_day</div>
+		<div>min_day</div>
+		<div>推荐天数</div>
+		<div>alias</div>
+		<div>region</div>
+		<div><span>修改</span>|<span>删除</span></div>
+	</div>
+	<div ng-repeat="city in cities" class="managesection">
+		<div>{{city.cn_name}}</div>
+		<div>{{city.name}}</div>
+		<div>{{city.max_day}}</div>
+		<div>{{city.min_day}}</div>
+		<div>{{city.reommand_day}}</div>
+		<div>{{city.alias}}</div>
+		<div>{{city.region}}</div>
+		<div><span>修改</span>|<span>删除</span></div>
+	</div>
+</div>
