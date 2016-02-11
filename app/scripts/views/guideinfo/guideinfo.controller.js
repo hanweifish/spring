@@ -68,23 +68,49 @@ function GuideInfoCtrl($scope, $http, $modal, Upload, Controller, Cities, toastr
     }
 
 
-    $scope.uploadFiles = function(files, errFiles) {
-        $scope.files = files;
+    $scope.uploadFiles = function(file, errFiles) {
+        console.log(file);
+        $scope.file = file;
         $scope.errFiles = errFiles;
-        angular.forEach(files, function(file) {
-            file.upload = Upload.upload({
-                url: Controller.base() + 'api/upload',
-                data: {file: file}
-            });
-            file.upload.then(function (response) {
-	        	$timeout(function () {
-	                $scope.result = response.data;
-	                toastr.success("文件上传成功");
-	            });
-            }, function (err) {
-            	$scope.errorMsg = err;
-        	});
-        });
+        var params = {
+            "file_name": file.name, 
+            "file_type": file.type
+        }
+
+        $http({
+            method: "GET",
+            url: Controller.base() + 'api/signed_url',
+            params: params,
+        })
+        .then(function(res){
+            console.log(res);
+            var data = res.data;
+            var url = data.url;
+            var signed_url = data.signed_request;
+            return $http.put(signed_url, file, {
+                 headers: {
+                   'Content-Type': file.type,
+                 },
+            })
+        })
+        .then(function(res){
+            console.log(res);
+        })
+
+        // angular.forEach(files, function(file) {
+        //     file.upload = Upload.upload({
+        //         url: Controller.base() + 'api/upload',
+        //         data: {file: file}
+        //     });
+        //     file.upload.then(function (response) {
+	       //  	$timeout(function () {
+	       //          $scope.result = response.data;
+	       //          toastr.success("文件上传成功");
+	       //      });
+        //     }, function (err) {
+        //     	$scope.errorMsg = err;
+        // 	});
+        // });
     }
 
 	$scope.submit = function(){

@@ -30,7 +30,8 @@ function CitiInfoFactory($http, Controller) {
                     id: city._id,
                     min: city.min_day,
                     max: city.max_day,
-                    alias: city.alias
+                    alias: city.alias,
+                    region: city.region
                 }
             })
         });

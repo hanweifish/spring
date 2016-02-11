@@ -1,5 +1,8 @@
 @import 'variables';
 
+
+
+
 .reviewPage {
 	width: 100%;
 	padding: 50px;
@@ -233,7 +236,25 @@
 	}
 }
 
-
+	.reviewtitle {
+		font-size: 1.8rem;
+		display: flex;
+		color: white;
+		font-weight: bold;
+		cursor: pointer;
+		div {
+			flex: 1;
+			text-align: center;
+			padding: 10px 0;
+			background: $traverllerOrange;
+		}
+		.opacity75 {
+			opacity: 0.75;
+		}
+		.opacity50 {
+			opacity: 0.5;
+		}
+	}
 
 
 

@@ -1,11 +1,36 @@
 @import 'variables';
 
-.tour {
+
+.tourpage {
 	width: 100%;
-	height: 600px;
-	display: flex;
+	
 	margin: 0 auto;
 	padding: 0 10px;
+	.tour {
+		display: flex;
+		height: 600px;
+	}
+	.reviewtitle {
+		width: 60%;
+		margin: 20px auto;
+		font-size: 1.8rem;
+		display: flex;
+		color: white;
+		font-weight: bold;
+		cursor: pointer;
+		div {
+			flex: 1;
+			text-align: center;
+			padding: 10px 0;
+			background: $traverllerOrange;
+		}
+		.opacity75 {
+			opacity: 0.75;
+		}
+		.opacity50 {
+			opacity: 0.5;
+		}
+	}
 }
 
 .tour-content {
@@ -38,14 +63,14 @@
 	}
 
 	.tour-content-footer{
-		widht: 100%;
+		width: 100%;
 		background: $traverllerOrange;
 		color: white;
 		font-weight: 500;
 		font-size: 2rem;
 		padding: 10px 0 10px 0;
 		display:flex;
-		margin-right: 15px;
+		text-align: center;
 		.icon {
 			width: 20%;
 			padding-left: 15%;
@@ -141,14 +166,22 @@
 				font-weight: 600;
 				color: $traverllerOrange;
 			}
+			div.selected {
+				color: white;
+				background: $traverllerOrange;
+				.section-right-title  i{
+					color: white;
+				}
+			}
 			.section-right {
 				width: 80%;
 				font-size: 1.3rem;
+				background: white;
+				border-radius: 10px;
 				.section-right-title {
 					padding: 20px;
 					font-weight: 500;
 					margin-bottom: 5px;
-					background: white;
 					cursor: pointer;
 					i {
 						font-size: 1.68rem;
@@ -176,7 +209,6 @@
 					}
 				}
 				.section-right-content {
-					background: white;
 					padding: 10px;
 					div {
 						font-size: 1.3rem;

@@ -54,6 +54,11 @@ function viewsManageConfig($stateProvider) {
         controller: 'UserManageCtrl'
     });
 
+    $stateProvider.state('manage.itinerary', {
+        url: '/itinerary',
+        templateUrl: 'scripts/views/manage/itinerary/itinerary.tpl.html',
+        controller: 'ItineraryManageCtrl'
+    });
 
 }
 

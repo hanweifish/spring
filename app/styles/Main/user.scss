@@ -15,7 +15,7 @@
 .user_info_maue{
 	padding: 30px 10px;
 	.user-icon {
-		flex:3;
+		flex:1;
 		display: flex;
 		position: relative;
 		img {
@@ -33,7 +33,7 @@
 		}
 	}
 	.user-right {
-		flex: 2;
+		flex: 1;
 		display: flex;
 		justify-content: space-around;
 		div:first-child {

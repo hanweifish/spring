@@ -7,11 +7,12 @@ angular.module('app.controllers', [])
 .controller('MainCtrl', [
     '$scope',
     '$http',
+    '$state',
     MainCtrl
 ]);
 
 
-function MainCtrl($scope, $http) {
+function MainCtrl($scope, $http, $state) {
     $scope.$parent.showfooter = true;
 
     $scope.tours = {
@@ -86,9 +87,12 @@ function MainCtrl($scope, $http) {
         {
             'name': '微博平台'
         },
-    ]
+    ];
 
-
+    $scope.chooseTour = function(tour){
+        console.log('haha');
+        $state.go('itinerary');
+    }
 
 
 }

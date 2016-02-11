@@ -45,6 +45,13 @@ function DashboardConfig ($stateProvider) {
         controller: 'ConfirmCtrl'
     });
 
+    $stateProvider.state('itinerary', {
+        url: '/itinerary',
+        templateUrl: 'scripts/views/itinerary/itinerary.tpl.html',
+        controller: 'ItineraryCtrl'
+    });
+
+
 
     $stateProvider.state('guideinfo', {
         url: '/guideinfo',

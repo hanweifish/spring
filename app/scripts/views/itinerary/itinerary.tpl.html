@@ -1,0 +1,72 @@
+<div class="itinerarypage">
+		<div class="itinerarytitle">{{itinerary.city_plan[0].city.name}}几日游</div>
+
+		<div class="itineraryheader">
+			<div>
+				<span>线路:</span>
+				<span ng-repeat="city in itinerary.city_plan " class="citynamelink">
+					{{city.city.name}}
+				</span>
+			</div>
+		</div>
+
+		<div class="itinerarybodycontent">
+
+			<div class="itinerarycontent" ng-repeat="city in itinerary.city_plan">
+				<div class="contentheader">D{{$index}} {{city.city.name}}</div>
+
+				<div ng-repeat="spots in city.spots.plan" ng-if="city.spots.plan[0][0].name">
+					<div class="tourspot">
+						<div>
+							<span><i class="fa fa-camera-retro"></i> 景点: </span>
+							<span ng-repeat="spot in spots">{{spot.name}}
+							</span>
+						</div>
+						<div>
+							<span><i class="fa fa-home"></i> 住宿: </span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+<!-- 					<div class="orderright">
+						<div class="guide-content-section">
+							<div class="guide-section-left">
+								<img ng-src="/images/guide/person.png" ng-click="openGuideModal(guide)">
+							</div>
+							<div class="guide-section-middle">
+								<div class="middle-header">
+									<div>{{city.guide[0].name}}</div>
+									<div class="stars">
+			                    		<i class="fa fa-star"></i>
+			                    		<i class="fa fa-star"></i>
+					                    <i class="fa fa-star"></i>
+					                    <i class="fa fa-star"></i>
+					                    <i class="fa fa-star-o"></i>
+			                		</div>
+								</div>
+								<hr>
+								<div>导游经验: {{city.guide[0].description}}
+								</div>
+								<div>
+									服务城市: <div ng-repeat="city in guide.cover_city">{{city.guide[0].cn_name}}</div>
+								</div>
+
+								<div>
+									用车: {{city.guide[0].car}}
+								</div>
+								<div class="drivetagsummary">
+									标签: <div ng-repeat="tag in city.guide[0].topic" class="drivetag">{{tag}}</div>
+								</div> -->
+							</div>
+						</div> 
+					</div>
+				</div>
+			</div>
+
+
+
+</div>
+
+

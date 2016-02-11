@@ -10,6 +10,7 @@ angular.module('app.controllers')
     '$modal',
     '$state',
     '$rootScope',
+    '$filter',
     'Controller',
     'Itinerary',
     'toastr',
@@ -22,7 +23,7 @@ angular.module('app.controllers')
 ]);
 
 
-function TourCtrl($scope, $http, $modal, $state, $rootScope, Controller, Itinerary, toastr, User, AUTH_EVENTS, CitiInfo, $cookieStore, NgMap) {
+function TourCtrl($scope, $http, $modal, $state, $rootScope, $filter, Controller, Itinerary, toastr, User, AUTH_EVENTS, CitiInfo, $cookieStore, NgMap) {
 
 	$scope.$parent.showfooter = false;
 
@@ -41,11 +42,12 @@ function TourCtrl($scope, $http, $modal, $state, $rootScope, Controller, Itinera
         var difference = $scope.itinerary.end_date - $scope.itinerary.start_date;
 
         $scope.diffDate = Math.floor(difference/1000/60/60/24);
-		// $scope.diffDate = $scope.requestData.date.endDate.diff($scope.requestData.date.startDate, 'days') + 1;
 	}
 
 	$scope.paths = _.map($scope.tours, function(tour){
-		return tour.city.name;
+		if(tour.city) {
+			return tour.city.name;
+		}
 	})
 
 	$scope.dragmoved = function(index) {
@@ -85,10 +87,25 @@ function TourCtrl($scope, $http, $modal, $state, $rootScope, Controller, Itinera
 
 	$scope.showSpotsStatus = false;
 
+
+
+
+	$scope.showSpotsStatus = true;
+
 	$scope.showSpots = function(spots, unused_spots){
 		$scope.selectedSpots = spots;
 		$scope.showSpotsStatus = true;
 		$scope.unused_spots = unused_spots;
+		clearAllSelected();
+		spots.selected = true;
+	}
+
+	function clearAllSelected() {
+		_.each($scope.tours, function(city) {
+			_.each(city.spots.plan, function(spot){
+				spot.selected = false;
+			})
+		})
 	}
 
 	$scope.deleteSpot = function(spot) {
@@ -115,17 +132,14 @@ function TourCtrl($scope, $http, $modal, $state, $rootScope, Controller, Itinera
 	}
 
 	function updatePlan(obj){
-		console.log(obj);
 		obj = _.extend(obj, $scope.itinerary);
 		delete obj.status;
 		$http.post(Controller.base() + 'api/plan', obj).then(function(res){
 			toastr.success('添加城市成功!');
-			console.log(res);
 			Itinerary.children = res.data;
 			Itinerary.getCityInfo()
 				.then(Itinerary.getSpots())
 				.then(function(){
-					console.log( Itinerary.children.city_plan);
 					$scope.tours = Itinerary.children.city_plan;
 					$scope.sugguest_cities = _.map(Itinerary.children.sugguest_cities, function(id){
 						return CitiInfo.getCitybyId(id);
@@ -171,54 +185,57 @@ function TourCtrl($scope, $http, $modal, $state, $rootScope, Controller, Itinera
 	});
 
 	function removeUnusedData(){
-		delete $scope.itinerary.status;
-		delete $scope.itinerary.sugguest_cities;
+		if($scope.itinerary.status) {
+			delete $scope.itinerary.status;			
+		}
+		if ($scope.itinerary.sugguest_cities) {
+			delete $scope.itinerary.sugguest_cities;
+		}
+		if ($scope.itinerary.sugguest_guide) {
+			delete $scope.itinerary.sugguest_guide;
+		}
 		_.each($scope.itinerary.city_plan, function(plan){
-			delete plan.spots.unused_spots;
+			if (plan.spots && plan.spots.unused_spots) {
+				delete plan.spots.unused_spots;
+			}
+			if (plan.sugguest_guide) {
+				delete plan.sugguest_guide;
+			}
 		})
 	}
 
 	function chooseGuideFunc() {
-		// $scope.showGuide = true;
+		$scope.status = 2;
 		// $scope.showMap = false;
-		console.log($scope.itinerary);
+
 		removeUnusedData();
 
-		console.log(JSON.stringify($scope.itinerary));
+		// console.log(JSON.stringify($scope.itinerary));
 		$scope.showSpotsStatus = false;
 		$scope.showGuide = true;
-		// TourInfo.itinerary.city = $scope.tours;
-		// TourInfo.itinerary.start_city = $scope.tours[0].city;
-		// TourInfo.itinerary.end_city = $scope.tours[$scope.tours.length - 1].city;
-		// console.log(JSON.stringify( TourInfo.itinerary));
+
 		// console.log(JSON.stringify($scope.itinerary));
-		// $http.post(Controller.base() + 'api/plan', $scope.itinerary).then(function(res){
-		// 	if(res.data.status === 'SUCCESS') {
-		// 		TourInfo.itinerary = res.data.itinerary;
-		// 		// console.log(JSON.stringify( TourInfo.itinerary));
-		// 		$http.post(Controller.base() + 'api/guide', {'itinerary': TourInfo.itinerary}).then(function(res){
-		// 			parseGuideInfo(res.data.itinerary);
-		// 			TourInfo.itineraryGroup = res.data.itinerary;
-		// 		})
-		// 	} else {
-		// 		console.log(res.data.status);
-		// 	}
-		// })
+		$http.post(Controller.base() + 'api/find_guide', $scope.itinerary).then(function(res){
+			console.log(res);
+			$scope.itinerary = _.clone(res.data);
+			Itinerary.children = _.clone(res.data);
+			$scope.guideInfo = $scope.itinerary.sugguest_oneguide;
+		})
 	}
 
 
 	// Default view to show one
-	// $scope.chooseGuideTypeStatus = 'one';
-	// $scope.chooseGuideType = function(type){
-	// 	$scope.chooseGuideTypeStatus = type;
-	// 	$scope.showOrder = false;
-	// 	resetQuote();
-	// }
+	$scope.chooseGuideTypeStatus = 'one';
+	$scope.chooseGuideType = function(type){
+		$scope.chooseGuideTypeStatus = type;
+		$scope.cancelSelectedGuide();
+		// resetQuote();
+	}
 
-	// $scope.showGuideContentStatus = false;
-	// $scope.toggleGuideContent = function(plan){
-	// 	plan.showGuideContentStatus = !plan.showGuideContentStatus;
-	// }
+	$scope.showGuideContentStatus = false;
+	$scope.toggleGuideContent = function(plan){
+		plan.showGuideContentStatus = !plan.showGuideContentStatus;
+	}
 
 
 	// function parseGuideInfo(data){
@@ -232,60 +249,54 @@ function TourCtrl($scope, $http, $modal, $state, $rootScope, Controller, Itinera
 	// 	})
 	// }
 
-	// $scope.selectGuide = function(guide, index){
-	// 	if ($scope.chooseGuideTypeStatus === 'one') {
-	// 		TourInfo.itinerary = _.filter(TourInfo.itineraryGroup, function(itinerary){
-	// 			return itinerary.guide_plan_type === 'ONE_GUIDE_FOR_THE_WHOLE_TRIP';
-	// 		})[0];
-	// 		_.map(TourInfo.itinerary.city, function(city) {
-	// 			city.guide = _.cloneDeep(guide);
-	// 		})
-	// 		$scope.selectedGuide = guide;
-	// 		TourInfo.itinerary["guide_for_whole_trip"] = _.clone(guide);
-	// 		TourInfo.itinerary['choose_one_guide_solution'] = true;
-	// 	} else if ($scope.chooseGuideTypeStatus === 'multi'){
-	// 		// console.log($scope.guideInfo_Multi);
-	// 		TourInfo.itinerary = _.filter(TourInfo.itineraryGroup, function(itinerary){
-	// 			return itinerary.guide_plan_type === 'ONE_GUIDE_FOR_EACH_CITY';
-	// 		})[0];
-	// 		$scope.multi_city_plan[index].guide = guide;
-	// 		$scope.multi_city_plan[index].status = 'selected';
+	$scope.selectGuide = function(guide, index){
+		if ($scope.chooseGuideTypeStatus === 'one') {
+			$scope.selectedGuide = guide;
+			_.each($scope.itinerary.city_plan, function(city){
+				city.selectedGuide = guide;
+			})
+			$scope.itinerary.guide_plan_type = 'one';
+		} else if ($scope.chooseGuideTypeStatus === 'multi'){
+			$scope.itinerary.filtedCity = $filter('cityFilter')($scope.itinerary.city_plan);
+			$scope.itinerary.filtedCity[index].selectedGuide = guide;
+			$scope.itinerary.guide_plan_type = 'multi';
+		}
+		$scope.showOrder = true;
+		$scope.showMap = false;
+		// resetQuote();
+	}
 
-	// 		TourInfo.itinerary.city = _.clone($scope.multi_city_plan);
-	// 		TourInfo.itinerary['choose_one_guide_solution'] = false;
-	// 	}
-	// 	$scope.showOrder = true;
-	// 	$scope.showMap = false;
-	// 	resetQuote();
+	$scope.cancelSelectedGuide = function(){
+		$scope.selectedGuide = {};
+		_.each($scope.itinerary.city_plan, function(city){
+			city.selectedGuide = {};
+		})
+		$scope.showOrder = false;
+		// resetQuote();
+	}
 
-	// }
+	$scope.cancelGuideFromList = function(index) {
+		console.log($scope.itinerary.city_plan);
+		$scope.itinerary.filtedCity = $filter('cityFilter')($scope.itinerary.city_plan);
+		console.log();
+		$scope.itinerary.filtedCity[index].selectedGuide = undefined;
+		// resetQuote();
+	}
 
+	$scope.quoteToPay = "获取价格";
 
-	// $scope.getQuote = function(){
-	// 	$scope.quotes = [];
-	// 	if($scope.chooseGuideTypeStatus === 'multi' && !checkPlanStatus()) {
-	// 		toastr.error('请为每个城市选择一个导游');
-	// 	} else {
-	// 				// console.log(JSON.stringify( TourInfo.itinerary));
-	// 		$http.post(Controller.base() + 'api/quote', {'itinerary': TourInfo.itinerary}).then(function(res){
-	// 			if($scope.chooseGuideTypeStatus === 'one') {
-	// 				TourInfo.itinerary = _.filter(res.data.itinerary, function(itinerary){
-	// 					return itinerary.guide_plan_type === 'ONE_GUIDE_FOR_THE_WHOLE_TRIP';
-	// 				})[0];
-	// 			} else if ($scope.chooseGuideTypeStatus === 'multi'){
-	// 				TourInfo.itinerary = _.filter(res.data.itinerary, function(itinerary){
-	// 					return itinerary.guide_plan_type === 'ONE_GUIDE_FOR_EACH_CITY';
-	// 				})[0];
-	// 			}
-	// 			$scope.quotes = TourInfo.itinerary.quote.cost_usd;
-	// 			$scope.showQuoteView = true;
-	// 			$scope.quoteToPay = "预览最终行程并支付";
-	// 		}).catch(function(e){
-	// 			console.log(e);
-	// 		})
-	// 	}
+	$scope.getQuote = function(){
+		$scope.quotes = [];
+		removeUnusedData();
+		// console.log(JSON.stringify($scope.itinerary));
 
-	// }
+		$http.post(Controller.base() + 'api/quote', $scope.itinerary).then(function(res){
+			console.log(res);
+		}).catch(function(e){
+			console.log(e);
+		})
+
+	}
 
 	// function checkPlanStatus(){
 	// 	var flag = 0;
@@ -334,16 +345,6 @@ function TourCtrl($scope, $http, $modal, $state, $rootScope, Controller, Itinera
 	// 	$scope.showQuoteView = false;
 	// }
 
-	// $scope.cancelSelectedGuide = function(){
-	// 	$scope.selectedGuide = {};
-	// 	$scope.showOrder = false;
-	// 	resetQuote();
-	// }
-
-	// $scope.cancelGuideFromList = function(index) {
-	// 	$scope.multi_city_plan[index].status = false;
-	// 	resetQuote();
-	// }
 
 	$scope.gotoStep = function(step) {
 		switch(step){

@@ -6,19 +6,19 @@
 	<p class="p-sm"> 更智能的旅行方式 </p>
 	<div class="tourgrid">
 		<div class="tourgrid-section">
-			<div ng-repeat="tour in tours.left" style="background-image:url({{tour.image}}); width: 100%; height: 620px; background-size: cover; display: flex; justify-content: flex-end; flex-direction: column">
+			<div ng-repeat="tour in tours.left" style="background-image:url({{tour.image}}); width: 100%; height: 620px; background-size: cover; display: flex; justify-content: flex-end; flex-direction: column" ng-click="chooseTour(tour)">
 				<div class="grid-name">{{tour.name}}</div>
 				<div class="grid-description">{{tour.description}}</div>
 			</div>			
 		</div>
 		<div class="tourgrid-section">
-			<div ng-repeat="tour in tours.middle" style="background-image:url({{tour.image}}) ;width: 100%;  background-size: cover; display: flex; justify-content: flex-end; flex-direction: column">
+			<div ng-repeat="tour in tours.middle" style="background-image:url({{tour.image}}) ;width: 100%;  background-size: cover; display: flex; justify-content: flex-end; flex-direction: column" ng-click="chooseTour(tour)">
 				<div class="grid-name">{{tour.name}}</div>
 				<div class="grid-description">{{tour.description}}</div>
 			</div>
 		</div>
 		<div class="tourgrid-section">
-			<div ng-repeat="tour in tours.right" style="background-image:url({{tour.image}}) ;width: 100% ; background-size: cover; display: flex; justify-content: flex-end; flex-direction: column">
+			<div ng-repeat="tour in tours.right" style="background-image:url({{tour.image}}) ;width: 100% ; background-size: cover; display: flex; justify-content: flex-end; flex-direction: column" ng-click="chooseTour(tour)">
 				<div class="grid-name">{{tour.name}}</div>
 				<div class="grid-description">{{tour.description}}</div>
 			</div>

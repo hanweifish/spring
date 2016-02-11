@@ -18,20 +18,10 @@
 				</div>
 			</div>
 			<div style="flex: 1">
-				<div class="form-select">
-					<div class="inputgroups">
-						<img ng-src="images/icon2.png">
-						<input type="text" ng-model="tourForm.num_people" placeholder="人数">
-					</div>
-				</div>
+				<div style="flex: 1"><traveller-select options="options.people" selected="tourForm.num_people" placeholder="人数" icon="images/icon2.png"></traveller-select></div>
 			</div>
 			<div style="flex: 1">
-				<div class="form-select">
-					<div class="inputgroups">
-						<img ng-src="images/icon2.png">
-						<input type="text" ng-model="tourForm.num_room" placeholder="房间">
-					</div>
-				</div>
+				<div style="flex: 1"><traveller-select options="options.room" selected="tourForm.num_room" placeholder="房间" icon="images/icon2.png"></traveller-select></div>
 			</div>
 		  </div>
 
