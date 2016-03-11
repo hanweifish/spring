@@ -8,15 +8,16 @@ angular.module('app.controllers')
     '$scope',
     '$http',
     '$state',
+    'toastr',
     '$location',
     '$timeout',
-    'TourInfo',
+    'Itinerary',
     'Controller',
     ReviewCtrl
 ]);
 
 
-function ReviewCtrl($scope, $http, $state, $location, $timeout, TourInfo, Controller) {
+function ReviewCtrl($scope, $http, $state, toastr, $location, $timeout, Itinerary, Controller) {
 
 // $scope.itinerary = {
 // 	"user_token": "b4bqh53icaj85m7vvr47gu3o9arl71oh6nuk7r63",
@@ -289,13 +290,14 @@ function ReviewCtrl($scope, $http, $state, $location, $timeout, TourInfo, Contro
 
 
 	$scope.$parent.showfooter = true;
-	$scope.itinerary = TourInfo.itinerary;
+	$scope.itinerary = Itinerary.children;
+	console.log($scope.itinerary);
 
-	_.each($scope.itinerary.city, function(city){
-		var id = city.city.city_id;
-		var num_days = city.num_days;
-		updatePlan(city, id, num_days);
-	})
+	// _.each($scope.itinerary.city, function(city){
+	// 	var id = city.city.city_id;
+	// 	var num_days = city.num_days;
+	// 	updatePlan(city, id, num_days);
+	// })
 
 	$scope.status = 1;
 	$scope.gotostep = function(index) {

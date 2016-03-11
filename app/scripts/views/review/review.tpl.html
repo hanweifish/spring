@@ -11,8 +11,8 @@
 			<div class="content">
 				<div class="sectionheader">
 					<div class="orderleft">
-						<div><span>名称: </span><span>{{itinerary.start_city.cn_name}}几日游</span> </div>
-						<div><span>人数: </span><span>{{itinerary.num_people}}</span> </div>
+						<div><span>名称: </span><span>{{itinerary.selected_tag}}游</span> </div>
+						<div><span>人数: </span><span>{{itinerary.num_people}} 人</span> </div>
 						<div><span>行程: </span></div>
 					</div>
 					<div class="orderright">
@@ -22,24 +22,25 @@
 								{{city.city.cn_name}}
 							</span>
 						</div>
-						<div><span>房间数: </span><span>{{itinerary.num_room}}</span></div>
+						<div><span>房间数: </span><span>{{itinerary.num_room}} 间</span></div>
 						<div><span>导游: </span></div>
 					</div>
 				</div>
 
 				<div class="sectionbody">
-					<div ng-repeat="city in itinerary.city" class="sectionbodycontent">
+					<div ng-repeat="city in itinerary.city_plan" class="sectionbodycontent">
 						<div class="orderleft">
-							<div ng-repeat="plan in city.plans" class="tourspotall">
+							<div ng-repeat="(key,value) in city.spots.plan" class="tourspotall">
 								<div class="tourspot">
-									<div>{{city.city.cn_name}}</div>
+									<div>{{city.city.name}}</div>
 									<div>
 										<span><i class="fa fa-camera-retro"></i> 景点: </span>
-										<span ng-repeat="spot in plan.spot">{{spot.info.name}}
+										<span ng-repeat="(key, value) in value">{{value.name}}
 										</span>
 									</div>
 									<div>
 										<span><i class="fa fa-home"></i> 住宿: </span>
+										<span>{{itinerary.hotel}}星级酒店</span>
 									</div>
 								</div>
 <!-- 								<div class="spotday">第{{$index}}天</div> -->

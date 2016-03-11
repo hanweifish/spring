@@ -98,6 +98,8 @@ function TourCtrl($scope, $http, $modal, $state, $rootScope, $filter, Controller
 		$scope.unused_spots = unused_spots;
 		clearAllSelected();
 		spots.selected = true;
+		$scope.showGuide = false;
+		$scope.showOrder = false;
 	}
 
 	function clearAllSelected() {
@@ -289,13 +291,18 @@ function TourCtrl($scope, $http, $modal, $state, $rootScope, $filter, Controller
 		$scope.quotes = [];
 		removeUnusedData();
 		// console.log(JSON.stringify($scope.itinerary));
+		$scope.quotes = 6825;
+		// $http.post(Controller.base() + 'api/quote', $scope.itinerary).then(function(res){
+		// 	console.log(res);
+		// }).catch(function(e){
+		// 	console.log(e);
+		// })
+		$scope.showQuoteView = true;
 
-		$http.post(Controller.base() + 'api/quote', $scope.itinerary).then(function(res){
-			console.log(res);
-		}).catch(function(e){
-			console.log(e);
-		})
+	}
 
+	$scope.gotoReview = function(){
+		$state.go('review');
 	}
 
 	// function checkPlanStatus(){

@@ -58,6 +58,7 @@ function UserFactory($rootScope, $resource, $state, $cookies, $cookieStore, Cont
         $resource(Controller.base() + 'signup')
             .save(auth).$promise
             .then(function(res) {
+                console.log(res);
                 $cookieStore.put('username', res.username);
                 // // $cookieStore.put('userimage', res.user_info.picture_url);
                 $cookieStore.put('isLoggin', true);
@@ -91,9 +92,9 @@ function UserFactory($rootScope, $resource, $state, $cookies, $cookieStore, Cont
             .save(auth).$promise
             .then(function(res) {
                 console.log(res);
-                //  $cookieStore.put('username', res.username);
-                // // // $cookieStore.put('token', res.token);
-                // $cookieStore.put('isLoggin', true);
+                $cookieStore.put('username', res.username);
+                // $cookieStore.put('token', res.token);
+                $cookieStore.put('isLoggin', true);
                 that.persistentData.token = res.token;
                 that.persistentData.loggedIn = true;
                 that.persistentData.username = auth.username;

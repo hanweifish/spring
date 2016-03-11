@@ -68,8 +68,8 @@
 				
 				<div class="breaksection"><i class="fa fa-plane"></i> 离开出境地: {{tours[tours.length-1].city.name}}</div>
 
-				<div class="tour-content-header">
-					推荐城市： <span ng-repeat="city in sugguest_cities" ng-click="addCity(city)" style="cursor: pointer"> {{city.name}}-</span>
+				<div class="tour-content-recommend">
+					推荐城市： <span ng-repeat="city in sugguest_cities" style="cursor: pointer"> {{city.name}}</span>
 				</div>
 
 			</div>
@@ -107,9 +107,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="guide-content-footer" ng-click="chooseGuide()" ng-if="!showQuoteView">
+<!-- 			<div class="guide-content-footer" ng-click="chooseGuide()" ng-if="!showQuoteView">
 				<div class="content">选择导游</div>
-			</div>
+			</div> -->
 		</div>
 
 		<div class="guide-content" ng-if="showSpotsStatus" style="background: #F7F6F2">

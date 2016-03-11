@@ -62,6 +62,17 @@
 		}
 	}
 
+	.tour-content-recommend {
+		font-size: 1.4rem;
+		span {
+			color: white;
+			background: $traverllerOrange;
+			margin-right: 5px;
+			padding: 2px 5px;
+		}
+	}
+
+
 	.tour-content-footer{
 		width: 100%;
 		background: $traverllerOrange;
@@ -343,6 +354,7 @@
 		width: 100%;
 		justify-content: center;
 		flex-wrap: wrap;
+		height: 80px;
 		.priceinfo {
 			background: $traverllerOrange;
 			color: white;
@@ -350,7 +362,7 @@
 			font-weight: 500;
 			padding: 10px;
 			width: 40%;
-			margin: 10px 10px 10px 0;
+			margin: 10px auto;
 			border-radius: 5px;
 			text-align: center;
 			&:hover {
